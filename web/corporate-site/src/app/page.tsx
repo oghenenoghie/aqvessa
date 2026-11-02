@@ -3,6 +3,7 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { Container } from "@/components/container";
 import { FactList } from "@/components/fact-list";
+import { OrganizationJsonLd } from "@/components/organization-json-ld";
 import { RingPattern } from "@/components/ring-pattern";
 import { Section } from "@/components/section";
 import { StageMeter } from "@/components/stage-meter";
@@ -22,6 +23,7 @@ export default function HomePage() {
   const [plutus] = PRODUCTS;
   return (
     <>
+      <OrganizationJsonLd />
       <Hero />
 
       <Section
