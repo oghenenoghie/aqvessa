@@ -27,6 +27,12 @@ export const PAGES = {
     lead: "We build proprietary software. Every product on this page carries one of five stages, and we do not describe a product as further along than the evidence shows.",
     description: "Aqvessa's software products, each shown with its current stage on a five-step ladder from proposed to production-ready.",
   },
+  projects: {
+    label: "Projects",
+    title: "What we have built",
+    lead: "Every project here has a working deployment, checked on 2 November 2026. Work for organisations is described without naming them.",
+    description: "Software products, organisation websites and demos built by Aqvessa, each with a working deployment.",
+  },
   engineering: {
     label: "Engineering",
     title: "How we build software",

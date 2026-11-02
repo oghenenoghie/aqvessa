@@ -5,6 +5,7 @@ import { Contact } from "@/components/sections/contact";
 import { Engineering } from "@/components/sections/engineering";
 import { Hero } from "@/components/sections/hero";
 import { ProductsBand } from "@/components/sections/products-band";
+import { ProjectsBand } from "@/components/sections/projects-band";
 import { StatStrip } from "@/components/sections/stat-strip";
 import { SITE } from "@/lib/site";
 
@@ -27,6 +28,7 @@ export default function HomePage() {
       <StatStrip />
       <BusinessCards />
       <ProductsBand />
+      <ProjectsBand />
       <Engineering />
       <Contact />
     </main>

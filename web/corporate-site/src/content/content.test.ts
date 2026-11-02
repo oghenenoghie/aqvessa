@@ -7,6 +7,7 @@ import * as engineering from "@/content/engineering";
 import * as enquiries from "@/content/enquiries";
 import * as pages from "@/content/pages";
 import * as products from "@/content/products";
+import * as projects from "@/content/projects";
 import { formatDate } from "@/lib/dates";
 import { NAV, ROUTES } from "@/lib/site";
 
@@ -40,6 +41,7 @@ const copy = [
   ...strings(company, "company"),
   ...strings(business, "business"),
   ...strings(products, "products"),
+  ...strings(projects, "projects"),
   ...strings(engineering, "engineering"),
   ...strings(enquiries, "enquiries"),
   ...strings(pages, "pages"),
@@ -122,5 +124,43 @@ describe("pages", () => {
   it("business area anchors are unique", () => {
     const slugs = business.BUSINESS_AREAS.map((area) => area.slug);
     expect(new Set(slugs).size).toBe(slugs.length);
+  });
+});
+
+describe("projects", () => {
+  const ORGANISATION_NAMES =
+    /anchorship|drydock|geca|dhn|natenrock|nea\b|ifs|publicsphere|pronl|streamline|folad|termly/i;
+
+  it("organisation work is never named or linked", () => {
+    for (const p of projects.projectsIn("organisations")) {
+      expect(p.url, p.slug).toBeNull();
+      for (const text of [p.name, p.summary, ...p.points]) expect(text, p.slug).not.toMatch(ORGANISATION_NAMES);
+    }
+  });
+
+  it("links are public HTTPS addresses with a label", () => {
+    for (const p of projects.PROJECTS.filter((x) => x.url)) {
+      expect(p.url, p.slug).toMatch(/^https:\/\//);
+      expect(p.urlLabel, p.slug).toBeTruthy();
+    }
+  });
+
+  it("every project has a known status, a summary and a stack", () => {
+    const statuses = ["Live", "Deployed", "Deployed, on request", "Builds published"];
+    for (const p of projects.PROJECTS) {
+      expect(statuses, p.slug).toContain(p.status);
+      expect(p.summary.length, p.slug).toBeGreaterThan(20);
+      expect(p.stack.length, p.slug).toBeGreaterThan(0);
+    }
+  });
+
+  it("slugs are unique and every group has projects", () => {
+    const slugs = projects.PROJECTS.map((p) => p.slug);
+    expect(new Set(slugs).size).toBe(slugs.length);
+    for (const g of projects.PROJECT_GROUPS) expect(projects.projectsIn(g.id).length, g.id).toBeGreaterThan(0);
+  });
+
+  it("the check date is a valid ISO date", () => {
+    expect(() => formatDate(projects.PROJECTS_CHECKED)).not.toThrow();
   });
 });
