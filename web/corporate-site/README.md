@@ -53,7 +53,7 @@ Plus `sitemap.xml`, `robots.txt`, a favicon from the compact mark, an Apple touc
 ## Before launch
 
 1. **Deployment Protection.** The Vercel project has Vercel Authentication on everything except custom domains. Open the production URL in a private window; if it asks for a Vercel login, change the setting under Settings, Deployment Protection, or add a custom domain.
-2. **Duplicate Vercel projects.** `aqvessa` and `aqvessa-6eg2` are linked to this repository with no Root Directory, so each push to `main` will start a build there that fails the same way. Delete them, or set their Root Directory.
+2. **Duplicate Vercel projects.** `aqvessa`, `aqvessa-6eg2` and `aqvessa-corporate-site` all deploy this site from `web/corporate-site`, so every push builds it three times. Keep one (this README assumes `aqvessa-corporate-site`) and delete the others or disconnect them from the repository.
 3. **Contact address.** Set `NEXT_PUBLIC_CONTACT_EMAIL` to a verified company address. Until then the contact page says the address will be published there.
 4. **Domain.** Set `NEXT_PUBLIC_SITE_URL` to the production domain, or rely on Vercel's production URL.
 5. **Plutus link.** `src/content/products.ts` links to `https://www.plutusng.com`, the domain in the Plutus site's own config. It could not be reached from the build environment, so check it is live before launch.
