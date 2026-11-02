@@ -1,6 +1,6 @@
 # Aqvessa brand resources
 
-Logo files and design tokens for Aqvessa. The full rules are in [`DESIGN.md`](../../DESIGN.md) at the repository root, and the agent skill is in [`.claude/skills/design-system-aqvessa/SKILL.md`](../../.claude/skills/design-system-aqvessa/SKILL.md).
+Logo files and design tokens for Aqvessa. The full rules are in [`DESIGN.md`](../../DESIGN.md) at the repository root.
 
 ## Files
 
