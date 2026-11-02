@@ -1,36 +1,54 @@
-# Plutus Technologies — marketing site
+# Aqvessa corporate website
 
-Public site for plutusng.com, which sells the Plutus accounting platform (double-entry books with VAT, WHT, CIT and the development levy, plus payroll as a module) in **Cloud** and **Desktop** editions.
-Next.js App Router, Tailwind CSS v4 and shadcn/ui conventions, using the letterhead brand (black, gold, serif wordmark).
+The public website for AQVESSA LIMITED. Next.js (App Router), React, TypeScript and Tailwind CSS v4.
+
+- **Layout:** taken from the Plutus marketing site (`oghenenoghie/plutus-technologies-landing-page`): utility bar, sticky header, eyebrow rules, card grids with bulleted lists, an engineering grid with mono tags, and a dark band for enquiries and the footer.
+- **Content and brand:** Aqvessa's, from the design system in [`DESIGN.md`](../../DESIGN.md) and [`resources/brand`](../../resources/brand).
+
+**Stage: under development.** Deployed from `main` by the Vercel project `aqvessa-corporate-site` (Root Directory `web/corporate-site`).
 
 ```bash
 npm install
 npm run dev        # http://localhost:3000
-npm test           # invoice posting golden tests (NG-2026.1)
 npm run typecheck
-npm run build
+npm test           # copy rules, content integrity, date formatting
+npm run build      # every route prerenders as static HTML
 ```
+
+CI (`.github/workflows/corporate-site.yml` at the repository root) runs typecheck, tests and build on every pull request and every push to `main` that touches this folder.
+
+## Pages
+
+| Route | Content |
+| --- | --- |
+| `/` | Tagline and company record, key figures, the five business areas, Plutus with its stage, engineering principles, enquiries |
+| `/about` | Who we are, mission and vision, values, registration |
+| `/business` | The five business areas, what each covers, and the technology direction |
+| `/products` | Plutus with its stage and status, and the five-stage ladder |
+| `/engineering` | Eight principles and the default stack |
+| `/contact` | Enquiry band and what to include |
+| `/legal` | Corporate information, intellectual property, general information, data handling |
+
+Plus `sitemap.xml`, `robots.txt`, schema.org `Organization` data on the home page, icons, an Open Graph card and a 404 page.
 
 ## Where things live
 
-- `src/app/globals.css`: brand tokens (light and dark) mapped into the Tailwind theme
-- `src/lib/compliance/`: rule set `NG-2026.1` and the invoice posting (VAT, WHT, balanced journals) used by the hero instrument. This stands in for `packages/compliance` until the site can import the engine's rule set directly.
-- `src/lib/site.ts`: contact details, navigation and the `LINKS` for the Cloud app and Desktop download
-- `src/app/`: one route per page. `/` (home), `/features`, `/accounting`, `/inventory`, `/analytics`, `/payroll`, `/countries`, `/editions`, `/pricing` and `/contact`, each with its own `generateMetadata()`, plus `sitemap.ts`. The utility bar, header and footer live in `layout.tsx`.
-- `src/lib/site.ts`: `FEATURE_PAGES` drives the home page cards, the footer and the sitemap; `NAV` is the header menu.
-- `src/lib/countries.ts`: the country catalogue, mirroring `plutus-hr-system` `app/compliance/multicountry.py` and `docs/countries/README.md`. Payroll is active in all six: Nigeria on its own rule versions, the other five on owner-approved engine rule sets with Tax Settings. Their VAT and withholding tax aren't approved.
-- `src/components/sections/`: one file per section, shared across pages. Only the invoice instrument, role tabs, mobile nav and copy buttons are client components.
-- `/docs`: the product documentation. `src/lib/docs.ts` holds every guide (steps, menu paths, roles, screenshots); `src/app/docs/` renders the index and one page per guide (`/docs/getting-started`, `/accounting`, `/inventory`, `/payroll`, `/people`, `/analytics`, `/desktop`). Screenshots are WebP files in `public/docs/screens`, taken from a local Cloud app filled with a fictional company. `scripts/docs-screens/` re-creates them; `npm test` checks each one exists at the size `docs.ts` declares. `/docs/tax-rules` shows every country's payroll rules (bands, contributions and levies, Tax Settings, sources) from `src/data/country-rules.json`, which `scripts/country-rules/export.py` writes from a `plutus-hr-system` checkout: re-run it whenever the app's rules change. Nothing in it is typed by hand.
+- `src/app/globals.css`: Aqvessa tokens, in light and dark (the theme follows the device setting), and one `type-*` utility per type style. Tailwind's default palette, radii, shadows and type scale are removed, so only tokens can be used. The dark band uses the dark-theme token values in both themes, so the reversed lockup sits on its own ground.
+- `src/content/`: all copy and company facts. `content.test.ts` checks every string, and the text in every `.tsx` file, against the writing rules:
+  - no exclamation marks, emoji or superlatives
+  - British spelling
+  - no "Aqvessa Technologies"
+  - capital AQVESSA only in AQVESSA LIMITED
+- `src/content/products.ts`: products and the five stages. Change a product's `stage` and `asOf` only after checking its repositories. A test fails if a product goes past stage 2.
+- `src/lib/site.ts`: site URL, contact channel and navigation.
+- `src/components/sections/`: the home page sections. `contact.tsx` is reused on `/contact`.
+- `next.config.ts`: security headers and a Content Security Policy without nonces, so pages stay static.
 
 ## Before launch
 
-- The new Cloud web app (`plutus-hr-system-frontend`) has no public deployment yet, so the Cloud buttons read "Request Cloud access" and go to the contact page. Once it is live, set `CLOUD_APP_URL` in `src/lib/site.ts` to its sign-in URL (ideally on a custom domain such as `app.plutusng.com`, without Vercel Deployment Protection in front of visitors); the buttons then read "Open Plutus Cloud".
-- `LINKS.desktop` points to `releases/latest/download/<installer>` on `desktop_plutus_hr-frontend` (`Plutus-Technologies-Setup.exe`, `Plutus-Technologies-mac.dmg`, `Plutus-Technologies-linux.AppImage`). These links work once that repo has a published GitHub release carrying those files, and always serve the newest release.
-- `LINKS.desktop` serves the latest `desktop_plutus_hr-frontend` release, `desktop-v0.1.0-build.43` as of 31 October 2026. It has Inventory, Analytics & Insights, Country Compliance, the country choice at sign-up, and the installer and update fixes on `/editions`; the Linux AppImage no longer needs libfuse2. It was built before the five newer countries went live, so it runs payroll for Nigeria only and has no Tax Settings; the Desktop guide says so until a newer release ships them.
-- VAT, CIT and the development levy are now in the statutory reference (§8 and §13). The small-company turnover limit is disputed: the Nigeria Tax Act as enacted says ₦50m, the Tax Administration Act and the reform committee say ₦100m. The site uses ₦100m by owner decision; revisit if the NRS rules otherwise.
-- The feature map in `platform.tsx` mirrors the app's own Full Feature Map (`plutus-hr-system-frontend`, `src/lib/nav.ts`) as of 13 October 2026, including the new Inventory module. Update both together when screens are added.
-- The docs describe the app as of 31 October 2026 (`plutus-hr-system-frontend` 17a637c, `plutus-hr-system` fb07dcc, Desktop build 43). Two things in the app need fixing, after which the docs change too:
-  - The web app has no buttons to validate, lock or mark a pay run paid (the API has the endpoints), so the Payroll guide lists the statuses but not how to move a run between them.
-  - The New Employee form labels the pay fields "Annual", but the payroll engine reads them per pay period. The People & HR guide says so in a note.
-- Add a real demo-request endpoint (Route Handler → email/CRM) before turning the contact block into a form.
-- Re-confirm the tax-matrix deadlines against primary agency guidance.
+1. **Contact address.** Set `NEXT_PUBLIC_CONTACT_EMAIL` to a verified company address. Until then the enquiry band says the address will be published there. The Plutus site's phone numbers and offices were not carried over because they belong to Plutus Technologies.
+2. **Domain.** Set `NEXT_PUBLIC_SITE_URL`, or rely on Vercel's production URL.
+3. **Duplicate Vercel projects.** `aqvessa`, `aqvessa-6eg2` and `aqvessa-vfvd` build the same folder as `aqvessa-corporate-site`. Keep one.
+4. **Plutus link and status.** Check that `https://www.plutusng.com` is live, and re-check the status lines in `src/content/products.ts`.
+5. **Logo masters.** Replace the trimmed PNGs with SVG masters when they exist.
+6. **Legal review.** Have a qualified Nigerian lawyer review the legal page and confirm whether "Technologies", which appears in the logo, can be used as a trading name.

@@ -5,27 +5,25 @@ import { Pill } from "@/components/ui/pill";
 export function PageIntro({
   eyebrow,
   title,
-  isNew,
+  tag,
   children,
   actions,
 }: {
   eyebrow: string;
   title: ReactNode;
-  isNew?: boolean;
+  tag?: string;
   children?: ReactNode;
   actions?: ReactNode;
 }) {
   return (
-    <section className="py-[clamp(48px,7vw,88px)]">
-      <div className="wrap grid max-w-[1200px] gap-[22px]">
+    <section className="py-12 lg:py-16">
+      <div className="wrap grid gap-6">
         <div className="flex flex-wrap items-center gap-3">
           <p className="eyebrow">{eyebrow}</p>
-          {isNew ? <Pill tone="gold">New</Pill> : null}
+          {tag ? <Pill tone="brand">{tag}</Pill> : null}
         </div>
-        <h1 className="max-w-[18ch] font-display text-[clamp(42px,5.6vw,72px)] font-semibold leading-[1] tracking-[-.015em]">
-          {title}
-        </h1>
-        {children ? <p className="lede max-w-[62ch]">{children}</p> : null}
+        <h1 className="max-w-[18ch] type-heading-lg text-ink sm:type-display-lg">{title}</h1>
+        {children ? <p className="lede">{children}</p> : null}
         {actions ? <div className="flex flex-wrap gap-3 pt-1">{actions}</div> : null}
       </div>
     </section>
