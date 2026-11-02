@@ -2,22 +2,23 @@ import { cva, type VariantProps } from "class-variance-authority";
 import type { AnchorHTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 
+/** One primary per view; line for the alternative; line-deep on the dark band. */
 export const buttonVariants = cva(
-  "group inline-flex min-h-[46px] items-center justify-center gap-2.5 whitespace-nowrap rounded-btn border px-[22px] text-[14.5px] font-extrabold tracking-[.01em] no-underline transition-colors [&_svg]:size-4 [&_svg]:flex-none",
+  "group inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md border px-6 py-3 type-body font-medium no-underline transition-colors duration-120 [&_svg]:size-4 [&_svg]:flex-none",
   {
     variants: {
       variant: {
-        gold: "border-gold bg-gold text-on-gold hover:border-ink hover:bg-ink hover:text-paper",
-        line: "border-line-strong bg-transparent text-ink hover:border-ink",
-        "line-deep": "border-deep-line bg-transparent text-deep-ink hover:border-gold",
+        primary: "border-brand bg-brand text-on-brand hover:border-brand-deep hover:bg-brand-deep",
+        line: "border-hairline bg-surface text-ink hover:border-ink",
+        "deep-primary": "border-deep-brand bg-deep-brand text-on-deep-brand hover:border-deep-ink hover:bg-deep-ink",
+        "line-deep": "border-deep-line bg-transparent text-deep-ink hover:border-deep-ink",
       },
     },
-    defaultVariants: { variant: "gold" },
+    defaultVariants: { variant: "primary" },
   },
 );
 
-type ButtonLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> &
-  VariantProps<typeof buttonVariants> & { disabled?: boolean };
+type ButtonLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & VariantProps<typeof buttonVariants> & { disabled?: boolean };
 
 export function ButtonLink({ className, variant, disabled, href, ...props }: ButtonLinkProps) {
   if (disabled) {
@@ -36,7 +37,7 @@ export function ButtonLink({ className, variant, disabled, href, ...props }: But
 /** Arrow that nudges right on hover of the parent button. */
 export function ArrowIcon() {
   return (
-    <svg aria-hidden="true" className="transition-transform group-hover:translate-x-[3px]">
+    <svg aria-hidden="true" className="transition-transform duration-120 group-hover:translate-x-1">
       <use href="#i-arrow" />
     </svg>
   );

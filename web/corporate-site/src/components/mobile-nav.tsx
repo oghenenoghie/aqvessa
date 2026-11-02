@@ -1,16 +1,23 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Icon } from "@/components/icons";
+import { MobileNavLinks } from "@/components/nav-links";
 import { ButtonLink } from "@/components/ui/button";
-import { LINKS, NAV } from "@/lib/site";
+import { LINKS } from "@/lib/site";
 
+/** Phone and tablet menu. Escape closes it and returns focus to the button. */
 export function MobileNav() {
   const [open, setOpen] = useState(false);
+  const button = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (!open) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      setOpen(false);
+      button.current?.focus();
+    };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
@@ -18,8 +25,9 @@ export function MobileNav() {
   return (
     <>
       <button
+        ref={button}
         type="button"
-        className="ml-auto inline-grid size-[46px] cursor-pointer place-items-center rounded-btn border border-line-strong bg-transparent text-ink nav:hidden"
+        className="ml-auto inline-grid size-12 cursor-pointer place-items-center rounded-md border border-hairline bg-surface text-ink transition-colors duration-120 hover:border-ink nav:hidden"
         aria-expanded={open}
         aria-controls="mobile-nav"
         aria-label={open ? "Close menu" : "Open menu"}
@@ -30,23 +38,15 @@ export function MobileNav() {
       <div
         id="mobile-nav"
         hidden={!open}
-        className="absolute inset-x-0 top-full border-y border-line bg-paper nav:hidden"
+        className="absolute inset-x-0 top-full border-y border-hairline bg-ground nav:hidden"
         onClick={(e) => {
           if ((e.target as HTMLElement).closest("a")) setOpen(false);
         }}
       >
-        <nav aria-label="Mobile" className="wrap grid gap-0.5 pt-3 pb-5">
-          {NAV.map((item) => (
-            <a key={item.href} href={item.href} className="border-b border-line py-3 font-bold no-underline">
-              {item.label}
-            </a>
-          ))}
-          <div className="mt-3 grid gap-2.5 sm:grid-cols-2">
-            <ButtonLink variant="line" href={LINKS.download}>
-              <Icon name="down" />
-              Download
-            </ButtonLink>
-            <ButtonLink href={LINKS.contact}>Book a demo</ButtonLink>
+        <nav aria-label="Mobile" className="wrap grid pt-2 pb-6">
+          <MobileNavLinks />
+          <div className="mt-4 grid">
+            <ButtonLink href={LINKS.contact}>Make an enquiry</ButtonLink>
           </div>
         </nav>
       </div>

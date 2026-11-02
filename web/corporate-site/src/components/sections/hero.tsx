@@ -1,49 +1,56 @@
+import { FactList } from "@/components/fact-list";
 import { Icon } from "@/components/icons";
 import { ArrowIcon, ButtonLink } from "@/components/ui/button";
-import { CLOUD_CTA, LINKS } from "@/lib/site";
-import { InvoiceInstrument } from "./invoice-instrument";
+import { CORPORATE_FACTS, FACTS_SOURCE, TAGLINE } from "@/content/company";
+import { LINKS } from "@/lib/site";
 
-const CHECKS = ["Debits equal credits on every post", "VAT and WHT on every invoice and bill", "TIN checked on customers and vendors"];
+const CHECKS = ["Registered under CAMA 2020", "Software engineering at the centre", "Every product shown with its stage"];
 
 export function Hero() {
   return (
-    <section aria-labelledby="hero-title" className="py-[clamp(48px,7vw,96px)]">
-      <div className="wrap grid items-start gap-[clamp(36px,5vw,72px)] lg:grid-cols-[minmax(0,1.08fr)_minmax(0,.92fr)]">
-        <div className="grid gap-[26px] pt-3">
-          <p className="eyebrow rise">Accounting for Nigeria and Africa</p>
-          <h1
-            id="hero-title"
-            className="rise font-display text-[clamp(50px,7.2vw,96px)] font-semibold leading-[.96] tracking-[-.018em] [animation-delay:.06s]"
-          >
-            Accounting, correct <em className="font-medium italic text-gold-text">by construction.</em>
+    <section aria-labelledby="hero-title" className="py-12 lg:py-16">
+      <div className="wrap grid items-start gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,.9fr)] lg:gap-16">
+        <div className="grid gap-6 pt-2">
+          <p className="eyebrow rise">Technology and software</p>
+          <h1 id="hero-title" className="rise type-heading-lg text-ink [animation-delay:60ms] sm:type-display-lg">
+            {TAGLINE.map((line, i) => (
+              <span key={line} className={i === TAGLINE.length - 1 ? "block text-ink-muted" : "block"}>
+                {line}
+              </span>
+            ))}
           </h1>
-          <p className="rise max-w-[54ch] text-[clamp(17px,1.6vw,20px)] text-ink-2 [animation-delay:.12s]">
-            Plutus is the compliance-native accounting platform. Every invoice, bill, stock movement, bank line and pay
-            run posts to a double-entry ledger, with VAT, withholding tax and company income tax calculated from a versioned rule set and
-            tracked to the deadline. Run it in the cloud or fully offline on your own machine.
+          <p className="rise lede text-ink [animation-delay:120ms]">
+            Aqvessa is a Nigerian technology company. We build software products and digital solutions for businesses in
+            Nigeria and international markets.
           </p>
-          <div className="rise flex flex-wrap gap-3 [animation-delay:.18s]">
+          <div className="rise flex flex-wrap gap-3 [animation-delay:180ms]">
             <ButtonLink href={LINKS.contact}>
-              Book a demo <ArrowIcon />
+              Make an enquiry <ArrowIcon />
             </ButtonLink>
-            <ButtonLink variant="line" href={LINKS.cloud}>
-              {CLOUD_CTA}
-            </ButtonLink>
-            <ButtonLink variant="line" href={LINKS.download}>
-              <Icon name="down" />
-              Download Desktop
+            <ButtonLink variant="line" href="/business">
+              What we do
             </ButtonLink>
           </div>
-          <ul className="rise flex flex-wrap gap-x-[22px] gap-y-2 border-t border-line pt-[22px] text-[13px] text-ink-soft [animation-delay:.24s]">
+          <ul className="rise flex flex-wrap gap-x-6 gap-y-2 border-t border-hairline pt-6 type-body-sm text-ink-muted [animation-delay:240ms]">
             {CHECKS.map((c) => (
               <li key={c} className="inline-flex items-center gap-2">
-                <Icon name="check" className="size-3.5 text-gold" />
+                <Icon name="check" className="size-4 text-ink" />
                 {c}
               </li>
             ))}
           </ul>
         </div>
-        <InvoiceInstrument />
+
+        <aside aria-labelledby="record-title" className="rise overflow-hidden rounded-lg border border-hairline bg-surface [animation-delay:120ms]">
+          <div className="flex items-baseline justify-between gap-4 border-b border-hairline bg-surface-sunk px-6 py-3">
+            <h2 id="record-title" className="type-label text-ink-muted">
+              Company record
+            </h2>
+            <p className="type-mono-sm text-ink-muted">CAMA 2020</p>
+          </div>
+          <FactList facts={CORPORATE_FACTS} className="px-6" />
+          <p className="border-t border-hairline px-6 py-3 type-caption text-ink-muted">{FACTS_SOURCE}</p>
+        </aside>
       </div>
     </section>
   );

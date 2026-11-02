@@ -12,15 +12,15 @@ export function SectionHead({
   children?: ReactNode;
 }) {
   return (
-    <div className="mb-[clamp(36px,5vw,56px)] grid max-w-[780px] gap-[18px]">
+    <div className="mb-12 grid max-w-3xl gap-4">
       <p className="eyebrow">{eyebrow}</p>
       <h2 className="h2" id={id}>
         {title}
       </h2>
-      {children ? <p className="lede">{children}</p> : null}
+      {children ? <div className="lede">{children}</div> : null}
     </div>
   );
 }
 
-export const sectionClass = "border-t border-line py-[clamp(72px,10vw,128px)]";
-export const deepSectionClass = "deep bg-deep py-[clamp(72px,10vw,128px)] text-deep-ink";
+export const sectionClass = "border-t border-hairline py-16";
+export const deepSectionClass = "deep bg-deep py-16 text-deep-ink";

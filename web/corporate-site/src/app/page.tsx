@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
+import { OrganizationJsonLd } from "@/components/organization-json-ld";
+import { BusinessCards } from "@/components/sections/business-cards";
 import { Contact } from "@/components/sections/contact";
 import { Engineering } from "@/components/sections/engineering";
 import { Hero } from "@/components/sections/hero";
-import { ModuleCards } from "@/components/sections/module-cards";
-import { Reform } from "@/components/sections/reform";
-import { Roles } from "@/components/sections/roles";
+import { ProductsBand } from "@/components/sections/products-band";
 import { StatStrip } from "@/components/sections/stat-strip";
 import { SITE } from "@/lib/site";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const title = `${SITE.name} · Compliance-native accounting for Nigeria`;
+  const title = `${SITE.name}: technology and software engineering`;
   return {
     title: { absolute: title },
     description: SITE.description,
@@ -21,12 +21,12 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default function HomePage() {
   return (
-    <main id="top">
+    <main id="main" tabIndex={-1} className="focus:outline-none">
+      <OrganizationJsonLd />
       <Hero />
       <StatStrip />
-      <ModuleCards />
-      <Reform />
-      <Roles />
+      <BusinessCards />
+      <ProductsBand />
       <Engineering />
       <Contact />
     </main>

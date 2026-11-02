@@ -1,29 +1,34 @@
-import { NG_2026_1 } from "@/lib/compliance/ng-2026-1";
-import { MODULE_COUNT } from "./platform";
+import { BUSINESS_AREAS } from "@/content/business";
+import { CORPORATE_FACTS } from "@/content/company";
+import { PRODUCTS, STAGES } from "@/content/products";
+
+const shareCapital = CORPORATE_FACTS.find((f) => f.term === "Registered share capital")?.value ?? "";
 
 const STATS = [
-  [String(NG_2026_1.taxes.length), "taxes calculated, posted and tracked"],
-  ["1", "double-entry ledger behind every invoice, bill, stock movement and pay run"],
-  [String(MODULE_COUNT), "screens across accounts, inventory, analytics, payroll and HR"],
-  ["2", "editions: Plutus Cloud and Plutus Desktop"],
+  [String(BUSINESS_AREAS.length), "business areas in our registered objects"],
+  [String(PRODUCTS.length), `product in development: ${PRODUCTS.map((p) => p.name).join(", ")}`],
+  [String(STAGES.length), "stages every product is measured against"],
+  [shareCapital, "registered share capital"],
 ] as const;
 
 export function StatStrip() {
   return (
-    <div className="border-y border-line bg-surface">
+    <div className="border-y border-hairline bg-surface">
       <dl className="wrap grid grid-cols-2 md:grid-cols-4">
         {STATS.map(([n, label], i) => (
           <div
             key={label}
             className={[
-              "grid gap-1 border-line py-[26px]",
-              i % 2 === 1 ? "border-l pl-[22px]" : "pr-[22px]",
+              "grid gap-1 border-hairline py-6",
+              i % 2 === 1 ? "border-l pl-6" : "pr-6",
               i >= 2 ? "border-t md:border-t-0" : "",
-              i === 2 ? "md:border-l md:pl-[22px]" : "",
+              i === 2 ? "md:border-l md:pl-6" : "",
             ].join(" ")}
           >
-            <dt className="order-2 text-[13.5px] text-ink-soft">{label}</dt>
-            <dd className="order-1 m-0 font-display text-[44px] font-semibold leading-none tabular-nums">{n}</dd>
+            <dt className="order-2 type-body-sm text-ink-muted">{label}</dt>
+            <dd className="order-1 m-0 type-heading-md tabular-nums text-ink lg:type-heading-lg">
+              {n}
+            </dd>
           </div>
         ))}
       </dl>
