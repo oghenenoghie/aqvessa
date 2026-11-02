@@ -1,31 +1,43 @@
 import { cva, type VariantProps } from "class-variance-authority";
-import Link from "next/link";
-import type { ComponentProps } from "react";
+import type { AnchorHTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 
-/**
- * Button styles. One primary per view; secondary for the alternative; text for low emphasis.
- * Hover and active use brand-deep; focus uses the global focus-visible ring.
- */
 export const buttonVariants = cva(
-  "motion-colors inline-flex items-center justify-center gap-2 rounded-md border type-body font-medium whitespace-nowrap no-underline [&_svg]:size-4 [&_svg]:shrink-0",
+  "group inline-flex min-h-[46px] items-center justify-center gap-2.5 whitespace-nowrap rounded-btn border px-[22px] text-[14.5px] font-extrabold tracking-[.01em] no-underline transition-colors [&_svg]:size-4 [&_svg]:flex-none",
   {
     variants: {
       variant: {
-        primary:
-          "border-brand bg-brand px-6 py-3 text-on-brand hover:border-brand-deep hover:bg-brand-deep active:border-brand-deep active:bg-brand-deep",
-        secondary:
-          "border-hairline bg-surface px-6 py-3 text-ink hover:border-ink active:bg-surface-sunk",
-        text: "border-transparent px-0 py-3 text-brand-text underline decoration-1 underline-offset-4 hover:text-brand-deep",
+        gold: "border-gold bg-gold text-on-gold hover:border-ink hover:bg-ink hover:text-paper",
+        line: "border-line-strong bg-transparent text-ink hover:border-ink",
+        "line-deep": "border-deep-line bg-transparent text-deep-ink hover:border-gold",
       },
     },
-    defaultVariants: { variant: "primary" },
+    defaultVariants: { variant: "gold" },
   },
 );
 
-type ButtonLinkProps = ComponentProps<typeof Link> & VariantProps<typeof buttonVariants>;
+type ButtonLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> &
+  VariantProps<typeof buttonVariants> & { disabled?: boolean };
 
-/** A link styled as a button. Internal links use next/link; external ones pass a full URL. */
-export function ButtonLink({ className, variant, ...props }: ButtonLinkProps) {
-  return <Link className={cn(buttonVariants({ variant }), className)} {...props} />;
+export function ButtonLink({ className, variant, disabled, href, ...props }: ButtonLinkProps) {
+  if (disabled) {
+    // No href: a disabled link is not focusable or followable.
+    return (
+      <a
+        aria-disabled="true"
+        className={cn(buttonVariants({ variant }), "pointer-events-none cursor-not-allowed opacity-50", className)}
+        {...props}
+      />
+    );
+  }
+  return <a href={href} className={cn(buttonVariants({ variant }), className)} {...props} />;
+}
+
+/** Arrow that nudges right on hover of the parent button. */
+export function ArrowIcon() {
+  return (
+    <svg aria-hidden="true" className="transition-transform group-hover:translate-x-[3px]">
+      <use href="#i-arrow" />
+    </svg>
+  );
 }
