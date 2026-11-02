@@ -1,0 +1,273 @@
+@import "tailwindcss";
+
+/*
+ * Aqvessa design tokens. Values come from resources/brand/tokens.json and DESIGN.md at the
+ * repository root. Light by default, dark from the system preference, and either one forced
+ * by data-theme on <html> (set by the theme toggle before first paint).
+ */
+:root {
+  color-scheme: light;
+  --ground: #f6f4ef;
+  --surface: #fffdfa;
+  --surface-sunk: #ebe8e0;
+  --hairline: #d9d5cb;
+  --ink: #16181d;
+  --ink-muted: #5b6472;
+  --brand: #c84e0a;
+  --brand-text: #b5440a;
+  --on-brand: #ffffff;
+  --brand-deep: #9a3b07;
+  --brand-tint: #fae8dc;
+  --signal-success: #1f6b45;
+  --signal-warning: #7a5b00;
+  --signal-danger: #a3262d;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --ground: #14161b;
+    --surface: #1d2026;
+    --surface-sunk: #0f1115;
+    --hairline: #2c3139;
+    --ink: #f6f4ef;
+    --ink-muted: #a7b0bf;
+    --brand: #f07a30;
+    --brand-text: #f07a30;
+    --on-brand: #1a0c04;
+    --brand-deep: #ff9a5c;
+    --brand-tint: #3a1f10;
+    --signal-success: #5fc08a;
+    --signal-warning: #e3b341;
+    --signal-danger: #f08a8f;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ground: #14161b;
+  --surface: #1d2026;
+  --surface-sunk: #0f1115;
+  --hairline: #2c3139;
+  --ink: #f6f4ef;
+  --ink-muted: #a7b0bf;
+  --brand: #f07a30;
+  --brand-text: #f07a30;
+  --on-brand: #1a0c04;
+  --brand-deep: #ff9a5c;
+  --brand-tint: #3a1f10;
+  --signal-success: #5fc08a;
+  --signal-warning: #e3b341;
+  --signal-danger: #f08a8f;
+}
+
+/* Remove Tailwind's default palette, radii, shadows and type scale so only tokens can be used. */
+@theme {
+  --color-*: initial;
+  --radius-*: initial;
+  --shadow-*: initial;
+  --inset-shadow-*: initial;
+  --drop-shadow-*: initial;
+  --text-shadow-*: initial;
+  --text-*: initial;
+  --font-*: initial;
+
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@theme inline {
+  --color-ground: var(--ground);
+  --color-surface: var(--surface);
+  --color-surface-sunk: var(--surface-sunk);
+  --color-hairline: var(--hairline);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-brand: var(--brand);
+  --color-brand-text: var(--brand-text);
+  --color-on-brand: var(--on-brand);
+  --color-brand-deep: var(--brand-deep);
+  --color-brand-tint: var(--brand-tint);
+  --color-signal-success: var(--signal-success);
+  --color-signal-warning: var(--signal-warning);
+  --color-signal-danger: var(--signal-danger);
+
+  --font-display: var(--font-inter-tight), "Inter Tight", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-sans: var(--font-inter), "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+/* Type styles. One utility per token in DESIGN.md, so components never set raw sizes. */
+@utility type-display-xl {
+  font-family: var(--font-display);
+  font-size: 72px;
+  line-height: 72px;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+}
+@utility type-display-lg {
+  font-family: var(--font-display);
+  font-size: 52px;
+  line-height: 56px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+@utility type-heading-lg {
+  font-family: var(--font-display);
+  font-size: 36px;
+  line-height: 42px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+@utility type-heading-md {
+  font-family: var(--font-display);
+  font-size: 26px;
+  line-height: 32px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+@utility type-body-lg {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+@utility type-body {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+@utility type-body-sm {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+@utility type-label {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+@utility type-descriptor {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+}
+@utility type-caption {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+@utility type-mono {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
+}
+@utility type-mono-sm {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Motion: duration-fast for hover and press feedback. Colour changes only, so nothing moves. */
+@utility motion-colors {
+  transition-property: color, background-color, border-color, text-decoration-color, outline-color;
+  transition-duration: 120ms;
+  transition-timing-function: var(--ease-standard);
+}
+
+/* Inline link: brand-text, underlined. */
+@utility link {
+  color: var(--brand-text);
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition-property: color, text-decoration-color;
+  transition-duration: 120ms;
+  transition-timing-function: var(--ease-standard);
+  &:hover {
+    color: var(--brand-deep);
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--ground);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 24px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: var(--brand-tint);
+    color: var(--ink);
+  }
+
+  /* Focus: 2px brand-text outline, offset 3px, on keyboard focus only. */
+  :focus-visible {
+    outline: 2px solid var(--brand-text);
+    outline-offset: 3px;
+  }
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/*
+ * Theme-swapped content, such as the primary and reversed logo lockups. Each PNG carries its own
+ * ground, so only the one drawn for the active theme may show.
+ */
+.theme-dark-only {
+  display: none;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-light-only {
+    display: none;
+  }
+  :root:not([data-theme="light"]) .theme-dark-only {
+    display: revert;
+  }
+}
+:root[data-theme="dark"] .theme-light-only {
+  display: none;
+}
+:root[data-theme="dark"] .theme-dark-only {
+  display: revert;
+}
