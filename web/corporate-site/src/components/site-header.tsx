@@ -1,31 +1,34 @@
-import { Container } from "@/components/container";
+import { Icon } from "@/components/icons";
 import { Logo } from "@/components/logo";
-import { MobileNav, NavLinks } from "@/components/nav-links";
-import { ThemeToggle } from "@/components/theme-toggle";
+import { MobileNav } from "@/components/mobile-nav";
+import { ButtonLink } from "@/components/ui/button";
+import { LINKS, NAV } from "@/lib/site";
 
-/**
- * The header sits on `ground` with space-6 above and below the lockup, which keeps the height of
- * the A clear around it. It does not stick, so content never scrolls into that clear space.
- */
 export function SiteHeader() {
   return (
-    <header className="relative">
-      <a
-        href="#main"
-        className="sr-only rounded-md bg-surface px-4 py-2 text-ink focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-30 focus:border focus:border-hairline"
-      >
-        Skip to content
-      </a>
-      <Container className="flex items-center justify-between gap-6 py-6">
-        <Logo width={128} eager />
-        <div className="flex items-center gap-2">
-          <nav aria-label="Main" className="hidden lg:block">
-            <NavLinks />
-          </nav>
-          <ThemeToggle />
-          <MobileNav />
+    <header className="sticky top-0 z-50 border-b border-line bg-paper">
+      <div className="wrap flex min-h-[76px] items-center gap-6">
+        <Logo />
+        <nav aria-label="Primary" className="ml-auto hidden gap-1 nav:flex">
+          {NAV.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className="relative whitespace-nowrap rounded-lg px-2 py-2 text-[14px] font-bold text-ink-2 no-underline after:absolute after:inset-x-2 after:bottom-[3px] after:h-[1.5px] after:origin-left after:scale-x-0 after:bg-gold after:transition-transform after:duration-200 hover:text-ink hover:after:scale-x-100"
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
+        <div className="hidden gap-2.5 nav:flex">
+          <ButtonLink variant="line" href={LINKS.download}>
+            <Icon name="down" />
+            Download
+          </ButtonLink>
+          <ButtonLink href={LINKS.contact}>Book a demo</ButtonLink>
         </div>
-      </Container>
+        <MobileNav />
+      </div>
     </header>
   );
 }

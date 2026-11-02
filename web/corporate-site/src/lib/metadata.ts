@@ -1,23 +1,21 @@
 import type { Metadata } from "next";
-import type { PageCopy } from "@/content/pages";
 import { SITE } from "@/lib/site";
 
-/**
- * Page metadata from its copy entry. Next.js merges metadata shallowly, so a page's openGraph
- * replaces the layout's: repeat the shared fields here.
- */
-export function pageMetadata(page: PageCopy, path: string): Metadata {
+/** Title, description, canonical URL and social cards for one public route. */
+export function pageMetadata({ title, description, path }: { title: string; description: string; path: string }): Metadata {
+  const full = `${title} · ${SITE.name}`;
   return {
-    title: page.title,
-    description: page.description,
+    title,
+    description,
     alternates: { canonical: path },
     openGraph: {
-      type: "website",
+      title: full,
+      description,
+      url: new URL(path, SITE.url).toString(),
       siteName: SITE.name,
-      locale: SITE.locale,
-      title: page.title,
-      description: page.description,
-      url: path,
+      type: "website",
+      locale: "en_NG",
     },
+    twitter: { card: "summary", title: full, description },
   };
 }
