@@ -47,7 +47,7 @@ export const PRODUCTS: readonly Product[] = [
       { term: "Desktop edition", value: "Early builds (version 0.1.0) published for Windows, macOS and Linux" },
       { term: "Cloud edition", value: "In development. Not yet publicly available" },
     ],
-    url: "https://www.plutusng.com",
+    url: "https://www.plutusbiztech.com",
     urlLabel: "Visit the Plutus website",
   },
 ];
