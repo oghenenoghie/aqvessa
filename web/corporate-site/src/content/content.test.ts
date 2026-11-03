@@ -9,7 +9,7 @@ import * as pages from "@/content/pages";
 import * as products from "@/content/products";
 import * as projects from "@/content/projects";
 import { formatDate } from "@/lib/dates";
-import { NAV, ROUTES } from "@/lib/site";
+import { CONTACT, NAV, ROUTES, whatsappHref } from "@/lib/site";
 
 /** Every string in the content modules, with the path it was found at. */
 function strings(value: unknown, path: string, out: { path: string; text: string }[] = []) {
@@ -45,6 +45,7 @@ const copy = [
   ...strings(engineering, "engineering"),
   ...strings(enquiries, "enquiries"),
   ...strings(pages, "pages"),
+  ...strings(CONTACT, "contact"),
   ...jsxText(join(process.cwd(), "src/app")),
   ...jsxText(join(process.cwd(), "src/components")),
 ];
@@ -162,5 +163,31 @@ describe("projects", () => {
 
   it("the check date is a valid ISO date", () => {
     expect(() => formatDate(projects.PROJECTS_CHECKED)).not.toThrow();
+  });
+});
+
+describe("contact", () => {
+  const COUNTRY_CODES: Record<string, string> = { Kuwait: "965", Nigeria: "234" };
+
+  it("the email is a single plain address", () => {
+    expect(CONTACT.email).toMatch(/^[a-z0-9._-]+@[a-z0-9-]+(\.[a-z0-9-]+)+$/);
+  });
+
+  it.each(CONTACT.whatsapp)("WhatsApp $display: shown, linked and labelled consistently", (n) => {
+    expect(n.digits).toMatch(/^[1-9]\d{7,14}$/);
+    expect(n.display.replace(/\D/g, "")).toBe(n.digits);
+    expect(n.display).toMatch(/^\+\d/);
+    expect(n.digits.startsWith(COUNTRY_CODES[n.country] ?? "?"), n.country).toBe(true);
+    expect(whatsappHref(n)).toBe(`https://wa.me/${n.digits}`);
+  });
+
+  it("numbers are never offered as telephone links", () => {
+    const sources = (dir: string): string[] =>
+      readdirSync(dir).flatMap((name) => {
+        const file = join(dir, name);
+        if (statSync(file).isDirectory()) return sources(file);
+        return /\.tsx?$/.test(file) && !file.endsWith(".test.ts") ? [file] : [];
+      });
+    for (const file of sources(join(process.cwd(), "src"))) expect(readFileSync(file, "utf8"), file).not.toMatch(/["'`]tel:/);
   });
 });

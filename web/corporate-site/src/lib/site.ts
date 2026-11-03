@@ -17,13 +17,27 @@ export const SITE = {
     "Aqvessa is a Nigerian technology company working in software engineering, technology services, digital services, commerce, and research and intellectual property.",
 } as const;
 
-/**
- * Verified company contact channels only. Leave a value null until it is confirmed: the site
- * shows a holding note instead.
- */
-export const CONTACT: { email: string | null } = {
-  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || null,
+export type WhatsAppNumber = {
+  country: string;
+  /** As shown on the page, in international format with spaces. */
+  display: string;
+  /** Country code and number, digits only, as WhatsApp's click-to-chat links expect. */
+  digits: string;
 };
+
+/**
+ * Company contact channels, as confirmed by the owner. The phone numbers take WhatsApp only, so
+ * they link to WhatsApp, never to tel:, and stay out of the structured data.
+ */
+export const CONTACT: { email: string; whatsapp: readonly WhatsAppNumber[] } = {
+  email: "info@aqvessa.org",
+  whatsapp: [
+    { country: "Kuwait", display: "+965 5083 8915", digits: "96550838915" },
+    { country: "Nigeria", display: "+234 810 867 0629", digits: "2348108670629" },
+  ],
+};
+
+export const whatsappHref = (n: WhatsAppNumber) => `https://wa.me/${n.digits}`;
 
 export const LINKS = {
   contact: "/contact",
