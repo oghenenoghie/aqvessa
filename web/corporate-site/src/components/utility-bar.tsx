@@ -1,6 +1,6 @@
 import { CONTACT, SITE } from "@/lib/site";
 
-/** The dark strip above the header: the registered company, and the enquiry address once verified. */
+/** The dark strip above the header: the registered company and the enquiry address. */
 export function UtilityBar() {
   return (
     <div role="complementary" aria-label="Company" className="deep border-b border-deep-line bg-deep type-caption text-deep-muted">
@@ -11,15 +11,9 @@ export function UtilityBar() {
           incorporated in Nigeria
         </span>
         <div className="hidden items-center gap-x-6 md:flex">
-          {CONTACT.email ? (
-            <a href={`mailto:${CONTACT.email}`} className="text-deep-ink no-underline hover:underline">
-              {CONTACT.email}
-            </a>
-          ) : (
-            <a href="/contact" className="text-deep-ink no-underline hover:underline">
-              Enquiries
-            </a>
-          )}
+          <a href={`mailto:${CONTACT.email}`} className="text-deep-ink no-underline hover:underline">
+            {CONTACT.email}
+          </a>
           <span>Companies and Allied Matters Act 2020</span>
         </div>
       </div>

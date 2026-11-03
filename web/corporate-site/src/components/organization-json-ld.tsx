@@ -2,7 +2,8 @@ import { CONTACT, SITE } from "@/lib/site";
 
 /**
  * schema.org Organization data for search engines. Only registered facts: name, legal name,
- * country, site and logo. The email appears only once a verified address is configured.
+ * country, site and logo, plus the enquiry email. The WhatsApp numbers are left out: a telephone
+ * entry would invite ordinary calls.
  */
 export function OrganizationJsonLd() {
   const data = {
@@ -14,7 +15,7 @@ export function OrganizationJsonLd() {
     logo: new URL("/brand/aqvessa-lockup-light.png", SITE.url).toString(),
     description: SITE.description,
     address: { "@type": "PostalAddress", addressCountry: "NG" },
-    ...(CONTACT.email ? { email: CONTACT.email } : {}),
+    email: CONTACT.email,
   };
   return (
     <script
