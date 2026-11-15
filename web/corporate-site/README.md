@@ -21,10 +21,10 @@ CI (`.github/workflows/corporate-site.yml` at the repository root) runs typechec
 
 | Route | Content |
 | --- | --- |
-| `/` | Tagline and company record, key figures, the five business areas, Plutus with its stage, projects, engineering principles, enquiries |
+| `/` | Tagline and company record, key figures, the five business areas, each product with its stage, projects, engineering principles, enquiries |
 | `/about` | Who we are, mission and vision, values, registration |
 | `/business` | The five business areas, what each covers, and the technology direction |
-| `/products` | Plutus with its stage and status, and the five-stage ladder |
+| `/products` | Plutus and Intelligent CBT, each with its stage and status, and the five-stage ladder |
 | `/projects` | 20 projects with a working deployment, in three groups: products, work for organisations (unnamed, unlinked) and demos |
 | `/engineering` | Eight principles and the default stack |
 | `/contact` | Enquiry band with the email and WhatsApp numbers, and what to include |

@@ -23,7 +23,7 @@ export type Product = {
   areas: readonly string[];
   status: readonly { term: string; value: string }[];
   url: string | null;
-  urlLabel: string;
+  urlLabel?: string;
 };
 
 export const PRODUCTS: readonly Product[] = [
@@ -49,6 +49,31 @@ export const PRODUCTS: readonly Product[] = [
     ],
     url: "https://www.plutusbiztech.com",
     urlLabel: "Visit the Plutus website",
+  },
+  {
+    slug: "intelligent-cbt",
+    name: "Intelligent CBT",
+    summary:
+      "A computer-based testing platform for schools. AI drafts exam questions only from a school's own approved learning materials, and teachers approve every question before it is used in an exam.",
+    stage: 2,
+    asOf: "2026-11-15",
+    areas: [
+      "AI question drafts with citations",
+      "Question bank and exam builder",
+      "Online exams and marking",
+      "Offline exams in computer labs",
+      "Results and item analysis",
+      "Learning materials and OCR",
+      "School accounts, classes and subjects",
+    ],
+    status: [
+      {
+        term: "Web app",
+        value: "In development. The exam workflow runs in the browser, from learning materials and AI drafts to released results. Not yet publicly available",
+      },
+      { term: "Desktop app", value: "For exams in school computer labs without the internet. In development" },
+    ],
+    url: null,
   },
 ];
 
