@@ -98,6 +98,17 @@ Its development areas include:
 - Business reporting and analytics.
 - Cloud and desktop software delivery.
 
+Another is **Intelligent CBT**, a computer-based testing platform for schools. AI drafts exam questions only from a school's own approved learning materials, and teachers approve every question before it is used in an exam.
+
+Its development areas include:
+
+- AI question drafts with citations to the source material.
+- Question bank and exam builder, with approval before publishing.
+- Online exams with automatic and teacher marking.
+- Offline exams on school computer-lab machines.
+- Results release and item analysis.
+- Learning material upload, text extraction and OCR.
+
 Product capabilities and release status should be verified against their respective repositories and official product documentation.
 
 ## Our Mission

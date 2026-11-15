@@ -6,7 +6,10 @@ const shareCapital = CORPORATE_FACTS.find((f) => f.term === "Registered share ca
 
 const STATS = [
   [String(BUSINESS_AREAS.length), "business areas in our registered objects"],
-  [String(PRODUCTS.length), `product in development: ${PRODUCTS.map((p) => p.name).join(", ")}`],
+  [
+    String(PRODUCTS.length),
+    `${PRODUCTS.length === 1 ? "product" : "products"} in development: ${new Intl.ListFormat("en-GB").format(PRODUCTS.map((p) => p.name))}`,
+  ],
   [String(STAGES.length), "stages every product is measured against"],
   [shareCapital, "registered share capital"],
 ] as const;
