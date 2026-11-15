@@ -37,6 +37,17 @@ export const CONTACT: { email: string; whatsapp: readonly WhatsAppNumber[] } = {
   ],
 };
 
+export type SocialLink = { label: string; href: string; icon: "linkedin" | "github" };
+
+/** Public profiles. A null address leaves the link out until the profile exists. */
+const LINKEDIN_URL: string | null = null;
+const GITHUB_URL: string | null = "https://github.com/oghenenoghie/aqvessa";
+
+export const SOCIAL: readonly SocialLink[] = [
+  ...(LINKEDIN_URL ? [{ label: "LinkedIn", href: LINKEDIN_URL, icon: "linkedin" as const }] : []),
+  ...(GITHUB_URL ? [{ label: "GitHub", href: GITHUB_URL, icon: "github" as const }] : []),
+];
+
 export const whatsappHref = (n: WhatsAppNumber) => `https://wa.me/${n.digits}`;
 
 export const LINKS = {
@@ -53,8 +64,15 @@ export const NAV: readonly NavItem[] = [
   { href: "/products", label: "Products" },
   { href: "/projects", label: "Projects" },
   { href: "/engineering", label: "Engineering" },
+  { href: "/how-we-work", label: "How we work" },
   { href: "/contact", label: "Contact" },
 ];
 
 /** Every public route, for the sitemap and the footer. */
-export const ROUTES: readonly NavItem[] = [{ href: "/", label: "Home" }, ...NAV, { href: "/legal", label: "Legal notice" }];
+export const LEGAL_NAV: readonly NavItem[] = [
+  { href: "/legal", label: "Legal notice" },
+  { href: "/legal/privacy", label: "Privacy notice" },
+  { href: "/legal/terms", label: "Terms of use" },
+];
+
+export const ROUTES: readonly NavItem[] = [{ href: "/", label: "Home" }, ...NAV, ...LEGAL_NAV];

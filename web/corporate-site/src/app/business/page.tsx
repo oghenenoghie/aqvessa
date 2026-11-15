@@ -31,24 +31,40 @@ export default function BusinessPage() {
           <ol>
             {BUSINESS_AREAS.map((area) => {
               const products = area.slug === "software-engineering" ? PRODUCTS : [];
+              const primary = area.tier === "primary";
+              const secondary = area.tier === "secondary";
               return (
                 <li
                   key={area.slug}
                   id={area.slug}
-                  className="grid scroll-mt-32 gap-6 border-b border-hairline py-12 last:border-b-0 lg:grid-cols-12 lg:gap-8"
+                  className={[
+                    "grid scroll-mt-32 gap-6 border-b border-hairline last:border-b-0 lg:grid-cols-12 lg:gap-8",
+                    primary ? "py-16" : secondary ? "py-6" : "py-12",
+                  ].join(" ")}
                 >
                   <div className="lg:col-span-4">
                     <p className="type-mono text-ink-muted">{area.number}</p>
-                    <h2 className="mt-3 type-heading-md">{area.name}</h2>
+                    <h2 className={primary ? "mt-3 type-heading-lg" : secondary ? "mt-2 type-body-lg font-medium" : "mt-3 type-heading-md"}>
+                      {area.name}
+                    </h2>
+                    {secondary && <p className="mt-1 type-label text-ink-muted">Secondary area</p>}
                   </div>
                   <div className="lg:col-span-8">
-                    <p className="max-w-prose type-body-lg">{area.summary}</p>
-                    <h3 className="mt-6 type-label text-ink-muted">Covers</h3>
-                    <ul className="brand-list mt-3 sm:grid-cols-2 sm:gap-x-8">
-                      {area.covers.map((item) => (
-                        <li key={item}>{item}</li>
-                      ))}
-                    </ul>
+                    <p className={primary ? "max-w-prose type-body-lg" : secondary ? "max-w-prose type-body-sm text-ink-muted" : "max-w-prose type-body-lg"}>
+                      {area.summary}
+                    </p>
+                    {secondary ? (
+                      <p className="mt-2 type-body-sm text-ink-muted">Covers {area.covers.join(", ").toLowerCase()}.</p>
+                    ) : (
+                      <>
+                        <h3 className="mt-6 type-label text-ink-muted">Covers</h3>
+                        <ul className="brand-list mt-3 sm:grid-cols-2 sm:gap-x-8">
+                          {area.covers.map((item) => (
+                            <li key={item}>{item}</li>
+                          ))}
+                        </ul>
+                      </>
+                    )}
                     {products.length > 0 && (
                       <p className="mt-6 type-body-sm text-ink-muted">
                         In development:{" "}

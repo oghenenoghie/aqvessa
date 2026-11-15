@@ -27,10 +27,31 @@ CI (`.github/workflows/corporate-site.yml` at the repository root) runs typechec
 | `/products` | Plutus and Intelligent CBT, each with its stage and status, and the five-stage ladder |
 | `/projects` | 20 projects with a working deployment, in three groups: products, work for organisations (unnamed, unlinked) and demos |
 | `/engineering` | Eight principles and the default stack |
-| `/contact` | Enquiry band with the email and WhatsApp numbers, and what to include |
-| `/legal` | Corporate information, intellectual property, general information, data handling |
+| `/how-we-work` | Three engagement models, five delivery steps and how pricing works |
+| `/contact` | Enquiry form, then the email and WhatsApp numbers, and what to include |
+| `/legal` | Legal notice: corporate information, intellectual property, general information |
+| `/legal/privacy` | Privacy notice under the Nigeria Data Protection Act 2023 |
+| `/legal/terms` | Terms of use |
 
 Plus `sitemap.xml`, `robots.txt`, schema.org `Organization` data on the home page, icons, an Open Graph card and a 404 page.
+
+## Facts still to supply
+
+`src/content/company.ts` holds `COMPANY_DETAILS`. A value of `null` leaves out every block that depends on it, so no placeholder can render. Fill a value in and the block appears everywhere it is used: `rcNumber`, `registeredOffice` (company record, footer, privacy notice, JSON-LD), `foundedYear` and `sectorsServed` (home figures), `retention` (privacy notice), `kuwaitLineNote` (contact band). `PEOPLE` in the same file fills the "Who runs Aqvessa" section on `/about`. The LinkedIn address is `LINKEDIN_URL` in `src/lib/site.ts`. Durations for the delivery steps are in `src/content/how-we-work.ts`. Project problem, outcome and screenshot lines are optional fields in `src/content/projects.ts`.
+
+## Enquiry form
+
+The form on `/contact` is validated in the browser and again in the server action (`src/app/contact/actions.ts`, rules in `src/lib/enquiry.ts`). It has a honeypot field and an in-memory rate limit of five submissions per IP in 15 minutes. The limit is per server instance: add a Vercel Firewall rate-limit rule on `/contact` for a hard limit.
+
+Delivery uses the Resend HTTP API (`src/lib/mailer.ts`). Set these in the Vercel project:
+
+| Variable | Purpose |
+| --- | --- |
+| `RESEND_API_KEY` | Required in production. Without it the form tells the visitor to email instead. |
+| `ENQUIRY_FROM` | Sender on a domain verified with Resend, for example `Aqvessa website <enquiries@aqvessa.org>` |
+| `ENQUIRY_TO` | Optional. Defaults to `info@aqvessa.org` |
+
+The form and the privacy notice assume no cookies and no analytics. If either changes, update `/legal/privacy`.
 
 ## Where things live
 

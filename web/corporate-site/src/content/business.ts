@@ -4,8 +4,12 @@
  * unless a product or engagement can be shown.
  */
 
+/** How much space an area gets: software engineering leads; commerce and research are secondary. */
+export type AreaTier = "primary" | "supporting" | "secondary";
+
 export type BusinessArea = {
   slug: string;
+  tier: AreaTier;
   number: string;
   name: string;
   summary: string;
@@ -15,6 +19,7 @@ export type BusinessArea = {
 export const BUSINESS_AREAS: readonly BusinessArea[] = [
   {
     slug: "software-engineering",
+    tier: "primary",
     number: "01",
     name: "Software engineering",
     summary: "Custom software, enterprise applications, SaaS products and platforms.",
@@ -27,6 +32,7 @@ export const BUSINESS_AREAS: readonly BusinessArea[] = [
   },
   {
     slug: "technology-solutions",
+    tier: "supporting",
     number: "02",
     name: "Technology solutions",
     summary: "IT consulting, cloud infrastructure, databases and cybersecurity.",
@@ -34,6 +40,7 @@ export const BUSINESS_AREAS: readonly BusinessArea[] = [
   },
   {
     slug: "digital-services",
+    tier: "supporting",
     number: "03",
     name: "Digital services",
     summary: "Websites, applications, digital marketing, branding, advertising and media.",
@@ -41,6 +48,7 @@ export const BUSINESS_AREAS: readonly BusinessArea[] = [
   },
   {
     slug: "commerce",
+    tier: "secondary",
     number: "04",
     name: "Commerce and e-commerce",
     summary: "Online commerce, distribution, fashion and apparel, and technology products.",
@@ -48,6 +56,7 @@ export const BUSINESS_AREAS: readonly BusinessArea[] = [
   },
   {
     slug: "research-and-innovation",
+    tier: "secondary",
     number: "05",
     name: "Research and innovation",
     summary: "Proprietary products, research and development, intellectual property and licensing.",

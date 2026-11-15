@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { FactList } from "@/components/fact-list";
 import { Icon } from "@/components/icons";
 import { ArrowIcon, ButtonLink } from "@/components/ui/button";
@@ -14,9 +15,10 @@ export function Hero() {
           <p className="eyebrow rise">Technology and software</p>
           <h1 id="hero-title" className="rise type-heading-lg text-ink [animation-delay:60ms] sm:type-display-lg">
             {TAGLINE.map((line, i) => (
-              <span key={line} className={i === TAGLINE.length - 1 ? "block text-ink-muted" : "block"}>
-                {line}
-              </span>
+              <Fragment key={line}>
+                {i > 0 && <br />}
+                {i === TAGLINE.length - 1 ? <span className="text-ink-muted">{line}</span> : line}
+              </Fragment>
             ))}
           </h1>
           <p className="rise lede text-ink [animation-delay:120ms]">

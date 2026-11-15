@@ -17,6 +17,6 @@ export function pageMetadata(page: Pick<PageCopy, "title" | "description">, path
       type: "website",
       locale: "en_NG",
     },
-    twitter: { card: "summary", title: full, description: page.description },
+    twitter: { card: "summary_large_image", title: full, description: page.description },
   };
 }

@@ -44,8 +44,12 @@ export const PRODUCTS: readonly Product[] = [
       "Cloud and desktop delivery",
     ],
     status: [
-      { term: "Desktop edition", value: "Early builds (version 0.1.0) published for Windows, macOS and Linux" },
-      { term: "Cloud edition", value: "In development. Not yet publicly available" },
+      { term: "Desktop edition", value: "Development build. Early builds (version 0.1.0) are published for Windows, macOS and Linux, for testing" },
+      { term: "Cloud edition", value: "Development build, deployed for testing. Not yet publicly available" },
+      {
+        term: "Codebases",
+        value: "Wagebook is the Supabase codebase for Plutus. Plutus Cloud is a parallel build of the same product on FastAPI and PostgreSQL",
+      },
     ],
     url: "https://www.plutusbiztech.com",
     urlLabel: "Visit the Plutus website",

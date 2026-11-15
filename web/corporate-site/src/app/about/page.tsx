@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { FactList } from "@/components/fact-list";
+import Image from "next/image";
 import { PageIntro } from "@/components/page-intro";
 import { SectionHead, sectionClass } from "@/components/section-head";
-import { ABOUT_PARAGRAPHS, CORPORATE_FACTS, FACTS_SOURCE, MISSION, VALUES, VISION } from "@/content/company";
+import { ABOUT_PARAGRAPHS, CORPORATE_FACTS, FACTS_SOURCE, MISSION, PEOPLE, VALUES, VISION } from "@/content/company";
 import { PAGES } from "@/content/pages";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -70,6 +71,45 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      {PEOPLE.length > 0 && (
+        <section aria-labelledby="people-title" className={sectionClass}>
+          <div className="wrap">
+            <SectionHead eyebrow="People" id="people-title" title="Who runs Aqvessa." />
+            <ul className="grid gap-6 md:grid-cols-2">
+              {PEOPLE.map((person) => (
+                <li key={person.name} className="grid gap-6 rounded-md border border-hairline bg-surface p-6 sm:grid-cols-[120px_1fr]">
+                  {person.portrait ? (
+                    <Image
+                      src={person.portrait.src}
+                      alt={person.portrait.alt}
+                      width={person.portrait.width}
+                      height={person.portrait.height}
+                      className="aspect-square w-[120px] rounded-md border border-hairline object-cover"
+                    />
+                  ) : (
+                    <div aria-hidden="true" className="grid aspect-square w-[120px] place-items-center rounded-md border border-hairline bg-surface-sunk type-heading-md text-ink-muted">
+                      {person.name
+                        .split(" ")
+                        .map((part) => part[0])
+                        .slice(0, 2)
+                        .join("")}
+                    </div>
+                  )}
+                  <div className="grid content-start gap-2">
+                    <h3 className="type-heading-md">{person.name}</h3>
+                    <p className="type-label text-ink-muted">{person.role}</p>
+                    <p className="type-body-sm text-ink-muted">{person.bio}</p>
+                    <a href={person.linkedin} target="_blank" rel="noopener" className="link justify-self-start type-body-sm font-medium">
+                      {person.name} on LinkedIn<span className="sr-only"> (opens in a new tab)</span>
+                    </a>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
 
       <section aria-labelledby="registration-title" className={sectionClass}>
         <div className="wrap grid gap-8 lg:grid-cols-12">

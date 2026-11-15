@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { PageIntro } from "@/components/page-intro";
-import { ProjectCard } from "@/components/project-card";
-import { SectionHead, sectionClass } from "@/components/section-head";
+import { ProjectsExplorer } from "@/components/projects-explorer";
 import { PAGES } from "@/content/pages";
-import { PROJECTS, PROJECT_GROUPS, PROJECTS_CHECKED, projectsIn } from "@/content/projects";
+import { PROJECTS, PROJECT_GROUPS, PROJECTS_CHECKED, WORKING_PROJECTS, projectsIn } from "@/content/projects";
 import { formatDate } from "@/lib/dates";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -19,8 +18,8 @@ export default function ProjectsPage() {
       </PageIntro>
 
       <section aria-label="How projects are listed" className="border-t border-hairline">
-        <div className="wrap py-8">
-          <dl className="grid gap-6 sm:grid-cols-3">
+        <div className="wrap grid gap-8 py-8 lg:grid-cols-12">
+          <dl className="grid gap-6 sm:grid-cols-3 lg:col-span-6">
             {PROJECT_GROUPS.map((group) => (
               <div key={group.id} className="grid gap-1">
                 <dt className="type-label text-ink-muted">{group.label}</dt>
@@ -28,30 +27,29 @@ export default function ProjectsPage() {
               </div>
             ))}
           </dl>
-          <p className="mt-6 max-w-prose type-caption text-ink-muted">
-            {PROJECTS.length} projects. &ldquo;Deployed&rdquo; means the latest production build succeeded when checked on{" "}
-            <time dateTime={PROJECTS_CHECKED}>{formatDate(PROJECTS_CHECKED)}</time>; &ldquo;on request&rdquo; means the
-            deployment is not open to the public. A project links to its site only when that site is public.
-          </p>
+          <div className="grid max-w-prose content-start gap-3 type-caption text-ink-muted lg:col-span-6">
+            <p>
+              {WORKING_PROJECTS.length} projects have a working deployment or a published build, checked on{" "}
+              <time dateTime={PROJECTS_CHECKED}>{formatDate(PROJECTS_CHECKED)}</time>. Intelligent CBT is listed with its stage and is not
+              counted, because it is still in development.
+            </p>
+            <p>
+              &ldquo;Deployed&rdquo; means the latest production build succeeded. &ldquo;Development build&rdquo; means a build we use for
+              testing, not a released product. A project links to its site only when that site is public.
+            </p>
+            <p id="on-request">
+              <span className="font-medium text-ink">Deployed, on request.</span> The deployment is not open to the public. To see a
+              demo, ask through the{" "}
+              <a href="/contact#enquiry" className="link">
+                enquiry form
+              </a>{" "}
+              and name the project.
+            </p>
+          </div>
         </div>
       </section>
 
-      {PROJECT_GROUPS.map((group) => (
-        <section key={group.id} id={group.id} aria-labelledby={`${group.id}-title`} className={sectionClass}>
-          <div className="wrap">
-            <SectionHead eyebrow={group.label} id={`${group.id}-title`} title={group.title}>
-              {group.intro}
-            </SectionHead>
-            <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {projectsIn(group.id).map((project) => (
-                <li key={project.slug}>
-                  <ProjectCard project={project} />
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-      ))}
+      <ProjectsExplorer groups={PROJECT_GROUPS} projects={PROJECTS} />
     </main>
   );
 }

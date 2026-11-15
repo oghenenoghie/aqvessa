@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { EnquiryForm } from "@/components/enquiry-form";
 import { PageIntro } from "@/components/page-intro";
 import { SectionHead, sectionClass } from "@/components/section-head";
 import { Contact } from "@/components/sections/contact";
@@ -16,6 +17,27 @@ export default function ContactPage() {
       <PageIntro eyebrow={page.label} title={page.title}>
         {page.lead}
       </PageIntro>
+
+      <section id="enquiry" aria-labelledby="enquiry-title" className={`${sectionClass} scroll-mt-24`}>
+        <div className="wrap grid gap-12 lg:grid-cols-12">
+          <div className="grid content-start gap-4 lg:col-span-4">
+            <p className="eyebrow">Enquiry form</p>
+            <h2 id="enquiry-title" className="type-heading-lg">
+              Tell us what you need.
+            </h2>
+            <p className="type-body text-ink-muted">
+              Fields marked optional can be left blank. Your details are used only to reply to your enquiry, as the{" "}
+              <a href="/legal/privacy" className="link">
+                privacy notice
+              </a>{" "}
+              explains. Prefer email or WhatsApp? Both are below.
+            </p>
+          </div>
+          <div className="lg:col-span-7 lg:col-start-6">
+            <EnquiryForm />
+          </div>
+        </div>
+      </section>
 
       <Contact />
 
