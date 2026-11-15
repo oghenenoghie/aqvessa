@@ -1,5 +1,5 @@
 import { cva, type VariantProps } from "class-variance-authority";
-import type { AnchorHTMLAttributes } from "react";
+import type { AnchorHTMLAttributes, ButtonHTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 
 /** One primary per view; line for the alternative; line-deep on the dark band. */
@@ -32,6 +32,13 @@ export function ButtonLink({ className, variant, disabled, href, ...props }: But
     );
   }
   return <a href={href} className={cn(buttonVariants({ variant }), className)} {...props} />;
+}
+
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & VariantProps<typeof buttonVariants>;
+
+/** A real button, for form submission. Same look as ButtonLink; the disabled state is dimmed and not focusable. */
+export function Button({ className, variant, type = "button", ...props }: ButtonProps) {
+  return <button type={type} className={cn(buttonVariants({ variant }), "cursor-pointer disabled:cursor-not-allowed disabled:opacity-50", className)} {...props} />;
 }
 
 /** Arrow that nudges right on hover of the parent button. */

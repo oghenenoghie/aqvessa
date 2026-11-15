@@ -30,7 +30,7 @@ export const PAGES = {
   projects: {
     label: "Projects",
     title: "What we have built",
-    lead: "Every project here has a working deployment, checked on 2 November 2026. Work for organisations is described without naming them.",
+    lead: "Each project has a working deployment or a published build, checked on 2 November 2026. Work for organisations is described without naming them.",
     description: "Software products, organisation websites and demos built by Aqvessa, each with a working deployment.",
   },
   engineering: {
@@ -39,16 +39,34 @@ export const PAGES = {
     lead: "Maintainability, security, scalability, performance and reliability come first. These are the principles and tools behind every system we build.",
     description: "The engineering principles, standards and default technology stack Aqvessa uses to build software.",
   },
+  howWeWork: {
+    label: "How we work",
+    title: "How we work with clients",
+    lead: "Three ways to engage us, five steps from enquiry to handover, and how pricing works.",
+    description: "How Aqvessa works with clients: engagement models, the five delivery steps from enquiry to support, and how projects are priced.",
+  },
   contact: {
     label: "Contact",
     title: "Make an enquiry",
     lead: "We welcome enquiries about technology partnerships, enterprise software, licensing, digital transformation and international business.",
-    description: "How to contact AQVESSA LIMITED about partnerships, enterprise software, licensing and other business enquiries.",
+    description: "Send an enquiry to AQVESSA LIMITED about partnerships, enterprise software, licensing and other business matters.",
   },
   legal: {
     label: "Legal",
     title: "Legal notice",
-    lead: "Corporate information about AQVESSA LIMITED, and the terms that apply to this website and its content.",
-    description: "Legal notice for the Aqvessa website: corporate information, intellectual property and how this website handles your data.",
+    lead: "Corporate information about AQVESSA LIMITED, and who owns the content of this website.",
+    description: "Legal notice for the Aqvessa website: corporate information, intellectual property and the limits of the information given.",
+  },
+  privacy: {
+    label: "Legal",
+    title: "Privacy notice",
+    lead: "What the enquiry form collects, why, on what legal basis, and how to exercise your rights under the Nigeria Data Protection Act 2023.",
+    description: "How AQVESSA LIMITED handles personal data from this website under the Nigeria Data Protection Act 2023, and your rights.",
+  },
+  terms: {
+    label: "Legal",
+    title: "Terms of use",
+    lead: "The terms that apply when you use this website.",
+    description: "Terms of use for the Aqvessa website: acceptable use, intellectual property, links, liability and governing law.",
   },
 } as const satisfies Record<string, PageCopy>;

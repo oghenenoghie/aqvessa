@@ -16,7 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
     description: SITE.description,
     alternates: { canonical: "/" },
     openGraph: { title, description: SITE.description, url: SITE.url, siteName: SITE.name, type: "website", locale: "en_NG" },
-    twitter: { card: "summary", title, description: SITE.description },
+    twitter: { card: "summary_large_image", title, description: SITE.description },
   };
 }
 

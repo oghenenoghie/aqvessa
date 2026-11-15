@@ -1,14 +1,18 @@
+import { Fragment } from "react";
 import { Icon, type IconName } from "@/components/icons";
+import { ArrowIcon, ButtonLink } from "@/components/ui/button";
 import { deepSectionClass } from "@/components/section-head";
+import { COMPANY_DETAILS } from "@/content/company";
 import { ENQUIRY_TYPES } from "@/content/enquiries";
 import { CONTACT, whatsappHref } from "@/lib/site";
 import { CopyButton } from "./copy-button";
 
-type Row = { icon: IconName; label: string; display: string; copy: string; href: string; external: boolean };
+type Row = { country?: string; icon: IconName; label: string; display: string; copy: string; href: string; external: boolean };
 
 const ROWS: readonly Row[] = [
   { icon: "mail", label: "Email", display: CONTACT.email, copy: CONTACT.email, href: `mailto:${CONTACT.email}`, external: false },
   ...CONTACT.whatsapp.map((n) => ({
+    country: n.country,
     icon: "chat" as const,
     label: `WhatsApp, ${n.country}`,
     display: n.display,
@@ -29,6 +33,9 @@ export function Contact() {
             Work with Aqvessa.
           </h2>
           <p className="lede">Tell us what you need, where you are and when you need it. Enquiries go to the business area they concern.</p>
+          <ButtonLink variant="line-deep" href="/contact#enquiry" className="justify-self-start">
+            Use the enquiry form <ArrowIcon />
+          </ButtonLink>
           <ul className="brand-list mt-4 type-body-sm">
             {ENQUIRY_TYPES.map((t) => (
               <li key={t} className="text-deep-ink">
@@ -40,8 +47,8 @@ export function Contact() {
         <div className="grid gap-4">
           <ul className="overflow-hidden rounded-lg border border-deep-line">
             {ROWS.map((r) => (
+              <Fragment key={r.href}>
               <li
-                key={r.href}
                 className="grid grid-cols-[40px_1fr_auto] items-center gap-3 border-b border-deep-line px-4 py-4 last:border-b-0 sm:gap-4 sm:px-6"
               >
                 <span className="grid size-10 place-items-center rounded-md bg-deep-brand text-on-deep-brand">
@@ -60,6 +67,12 @@ export function Contact() {
                 </div>
                 <CopyButton value={r.copy} label={`${r.label} ${r.display}`} />
               </li>
+              {r.country === "Kuwait" && COMPANY_DETAILS.kuwaitLineNote && (
+                <li className="border-b border-deep-line px-4 py-3 type-body-sm text-deep-muted last:border-b-0 sm:px-6">
+                  {COMPANY_DETAILS.kuwaitLineNote}
+                </li>
+              )}
+              </Fragment>
             ))}
           </ul>
           <p className="type-body-sm text-deep-muted">
