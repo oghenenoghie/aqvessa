@@ -4,25 +4,39 @@ import { ArrowIcon, ButtonLink } from "@/components/ui/button";
 import { deepSectionClass } from "@/components/section-head";
 import { COMPANY_DETAILS } from "@/content/company";
 import { ENQUIRY_TYPES } from "@/content/enquiries";
-import { CONTACT, whatsappHref } from "@/lib/site";
+import { CONTACT, telHref, whatsappHref } from "@/lib/site";
 import { CopyButton } from "./copy-button";
 
-type Row = { country?: string; icon: IconName; label: string; display: string; copy: string; href: string; external: boolean };
+type Row = {
+  country?: string;
+  icon: IconName;
+  label: string;
+  display: string;
+  copy: string;
+  href: string;
+  external: boolean;
+  /** A second way to use the same number: WhatsApp, for a number whose main link is a call. */
+  secondary?: { label: string; href: string };
+};
 
 const ROWS: readonly Row[] = [
   { icon: "mail", label: "Email", display: CONTACT.email, copy: CONTACT.email, href: `mailto:${CONTACT.email}`, external: false },
-  ...CONTACT.whatsapp.map((n) => ({
-    country: n.country,
-    icon: "chat" as const,
-    label: `WhatsApp, ${n.country}`,
-    display: n.display,
-    copy: `+${n.digits}`,
-    href: whatsappHref(n),
-    external: true,
-  })),
+  ...CONTACT.whatsapp.map((n): Row => {
+    const call = telHref(n);
+    return {
+      country: n.country,
+      icon: call ? "phone" : "chat",
+      label: call ? `Phone and WhatsApp, ${n.country}` : `WhatsApp, ${n.country}`,
+      display: n.display,
+      copy: `+${n.digits}`,
+      href: call ?? whatsappHref(n),
+      external: !call,
+      secondary: call ? { label: "Message on WhatsApp", href: whatsappHref(n) } : undefined,
+    };
+  }),
 ];
 
-/** The dark enquiry band: what to write about, and the company's email and WhatsApp numbers. */
+/** The dark enquiry band: what to write about, and the company's email, phone and WhatsApp numbers. */
 export function Contact() {
   return (
     <section id="contact" aria-labelledby="contact-title" className={deepSectionClass}>
@@ -61,9 +75,20 @@ export function Contact() {
                     {...(r.external ? { target: "_blank", rel: "noopener" } : {})}
                     className="type-body font-medium tabular-nums text-deep-ink no-underline hover:underline [overflow-wrap:anywhere]"
                   >
-                    <span className={r.external ? "copy-value whitespace-nowrap" : "copy-value"}>{r.display}</span>
+                    <span className={r.country ? "copy-value whitespace-nowrap" : "copy-value"}>{r.display}</span>
                     {r.external && <span className="sr-only">, opens WhatsApp</span>}
                   </a>
+                  {r.secondary && (
+                    <a
+                      href={r.secondary.href}
+                      target="_blank"
+                      rel="noopener"
+                      className="block type-body-sm text-deep-muted underline hover:text-deep-ink"
+                    >
+                      {r.secondary.label}
+                      <span className="sr-only">, opens WhatsApp</span>
+                    </a>
+                  )}
                 </div>
                 <CopyButton value={r.copy} label={`${r.label} ${r.display}`} />
               </li>
@@ -76,7 +101,8 @@ export function Contact() {
             ))}
           </ul>
           <p className="type-body-sm text-deep-muted">
-            Both numbers are for WhatsApp only, not ordinary calls or text messages.
+            The Kuwait number is for WhatsApp only, not ordinary calls or text messages. The Nigerian number takes calls as
+            well as WhatsApp.
           </p>
         </div>
       </div>

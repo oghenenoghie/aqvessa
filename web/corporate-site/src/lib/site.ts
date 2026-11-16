@@ -23,17 +23,20 @@ export type WhatsAppNumber = {
   display: string;
   /** Country code and number, digits only, as WhatsApp's click-to-chat links expect. */
   digits: string;
+  /** True only for a number the owner confirmed also takes ordinary calls. */
+  calls: boolean;
 };
 
 /**
- * Company contact channels, as confirmed by the owner. The phone numbers take WhatsApp only, so
- * they link to WhatsApp, never to tel:, and stay out of the structured data.
+ * Company contact channels, as confirmed by the owner. Both numbers are on WhatsApp. Only the
+ * Nigerian number also takes ordinary calls, so only it gets a tel: link and a telephone entry in
+ * the structured data; the Kuwait number stays WhatsApp only.
  */
 export const CONTACT: { email: string; whatsapp: readonly WhatsAppNumber[] } = {
   email: "info@aqvessa.org",
   whatsapp: [
-    { country: "Kuwait", display: "+965 5083 8915", digits: "96550838915" },
-    { country: "Nigeria", display: "+234 810 867 0629", digits: "2348108670629" },
+    { country: "Kuwait", display: "+965 5083 8915", digits: "96550838915", calls: false },
+    { country: "Nigeria", display: "+234 810 867 0629", digits: "2348108670629", calls: true },
   ],
 };
 
@@ -49,6 +52,9 @@ export const SOCIAL: readonly SocialLink[] = [
 ];
 
 export const whatsappHref = (n: WhatsAppNumber) => `https://wa.me/${n.digits}`;
+
+/** A call link, only for a number that takes ordinary calls. Every tel: link on the site comes from here. */
+export const telHref = (n: WhatsAppNumber): string | null => (n.calls ? `tel:+${n.digits}` : null);
 
 export const LINKS = {
   contact: "/contact",

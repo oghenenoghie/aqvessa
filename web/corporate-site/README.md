@@ -5,7 +5,7 @@ The public website for AQVESSA LIMITED. Next.js (App Router), React, TypeScript 
 - **Layout:** taken from the Plutus marketing site (`oghenenoghie/plutus-technologies-landing-page`): utility bar, sticky header, eyebrow rules, card grids with bulleted lists, an engineering grid with mono tags, and a dark band for enquiries and the footer.
 - **Content and brand:** Aqvessa's, from the design system in [`DESIGN.md`](../../DESIGN.md) and [`resources/brand`](../../resources/brand).
 
-**Stage: under development.** Deployed from `main` by the Vercel project `aqvessa-corporate-site` (Root Directory `web/corporate-site`).
+**Stage: under development.** Deployed from `main` by the Vercel project `aqvessa` (Root Directory `web/corporate-site`), the one project kept of the four that once built this folder.
 
 ```bash
 npm install
@@ -28,7 +28,7 @@ CI (`.github/workflows/corporate-site.yml` at the repository root) runs typechec
 | `/projects` | 20 projects with a working deployment, in three groups: products, work for organisations (unnamed, unlinked) and demos |
 | `/engineering` | Eight principles and the default stack |
 | `/how-we-work` | Three engagement models, five delivery steps and how pricing works |
-| `/contact` | Enquiry form, then the email and WhatsApp numbers, and what to include |
+| `/contact` | Enquiry form, then the email, phone and WhatsApp numbers, and what to include |
 | `/legal` | Legal notice: corporate information, intellectual property, general information |
 | `/legal/privacy` | Privacy notice under the Nigeria Data Protection Act 2023 |
 | `/legal/terms` | Terms of use |
@@ -63,15 +63,14 @@ The form and the privacy notice assume no cookies and no analytics. If either ch
   - capital AQVESSA only in AQVESSA LIMITED
 - `src/content/projects.ts`: the projects page. A project is listed only when its latest production deployment succeeded (or, for Plutus Desktop, installer builds are published), checked on `PROJECTS_CHECKED`. Each entry is written from its repository. Work for organisations is never named or linked; tests enforce that, and that every link is a public HTTPS address. Re-check deployments and update the date when adding or removing a project.
 - `src/content/products.ts`: products and the five stages. Change a product's `stage` and `asOf` only after checking its repositories. A test fails if a product goes past stage 2.
-- `src/lib/site.ts`: site URL, contact details and navigation. Enquiries go to `info@aqvessa.org` and to two numbers that take WhatsApp only (Kuwait and Nigeria). The numbers link to WhatsApp, never to `tel:`, and stay out of the structured data; tests check that each number's display, link and country code agree.
+- `src/lib/site.ts`: site URL, contact details and navigation. Enquiries go to `info@aqvessa.org` and to two WhatsApp numbers. The Kuwait number is WhatsApp only. The Nigerian number (`calls: true`) also takes ordinary calls, so it alone gets a `tel:` link and a `telephone` entry in the structured data. Tests check that each number's display, links and country code agree, and that every `tel:` link comes from `telHref`, which refuses a number without `calls`.
 - `src/components/sections/`: the home page sections. `contact.tsx` is reused on `/contact`.
 - `next.config.ts`: security headers and a Content Security Policy without nonces, so pages stay static.
 
 ## Before launch
 
-1. **Deployment Protection.** The `aqvessa-corporate-site` Vercel project has Vercel Authentication on everything except custom domains, so `aqvessa-corporate-site.vercel.app` asks visitors to sign in to Vercel. Add a custom domain, or change the setting under Settings, Deployment Protection, before sharing the site.
+1. **Deployment Protection.** Check the `aqvessa` Vercel project under Settings, Deployment Protection. With Vercel Authentication on everything except custom domains, the project's `.vercel.app` address asks visitors to sign in to Vercel. Add a custom domain, or change the setting, before sharing the site.
 2. **Domain.** Set `NEXT_PUBLIC_SITE_URL`, or rely on Vercel's production URL.
-3. **Duplicate Vercel projects.** `aqvessa`, `aqvessa-6eg2` and `aqvessa-vfvd` build the same folder as `aqvessa-corporate-site`. Keep one.
-4. **Plutus link and status.** The Plutus links point to `www.plutusbiztech.com`, the domain attached to the Plutus site's Vercel project (its DNS reported as correctly configured on 2 November 2026). Re-check the status lines in `src/content/products.ts`.
-5. **Logo masters.** Replace the trimmed PNGs with SVG masters when they exist.
-6. **Legal review.** Have a qualified Nigerian lawyer review the legal page and confirm whether "Technologies", which appears in the logo, can be used as a trading name.
+3. **Plutus link and status.** The Plutus links point to `www.plutusbiztech.com`, the domain attached to the Plutus site's Vercel project (its DNS reported as correctly configured on 2 November 2026). Re-check the status lines in `src/content/products.ts`.
+4. **Logo masters.** Replace the trimmed PNGs with SVG masters when they exist.
+5. **Legal review.** Have a qualified Nigerian lawyer review the legal page and confirm whether "Technologies", which appears in the logo, can be used as a trading name.

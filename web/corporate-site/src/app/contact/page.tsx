@@ -30,7 +30,7 @@ export default function ContactPage() {
               <a href="/legal/privacy" className="link">
                 privacy notice
               </a>{" "}
-              explains. Prefer email or WhatsApp? Both are below.
+              explains. Prefer email, WhatsApp or a phone call? The details are below.
             </p>
           </div>
           <div className="lg:col-span-7 lg:col-start-6">
