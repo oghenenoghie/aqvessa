@@ -4,10 +4,11 @@ import { CONTACT, SITE, SOCIAL } from "@/lib/site";
 /**
  * schema.org Organization data for search engines. Only registered facts: name, legal name,
  * country, site and logo, the enquiry email, the RC number and registered office once supplied, and
- * the public profiles. The WhatsApp numbers are left out: a telephone
- * entry would invite ordinary calls.
+ * the public profiles. Only a number that takes ordinary calls is listed as a telephone; the
+ * WhatsApp-only number is left out, because a telephone entry would invite calls.
  */
 export function OrganizationJsonLd() {
+  const callable = CONTACT.whatsapp.filter((n) => n.calls).map((n) => `+${n.digits}`);
   const data = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -22,6 +23,7 @@ export function OrganizationJsonLd() {
       addressCountry: "NG",
     },
     email: CONTACT.email,
+    ...(callable.length > 0 ? { telephone: callable.length === 1 ? callable[0] : callable } : {}),
     ...(COMPANY_DETAILS.rcNumber
       ? { identifier: { "@type": "PropertyValue", propertyID: "CAC registration number", value: COMPANY_DETAILS.rcNumber } }
       : {}),

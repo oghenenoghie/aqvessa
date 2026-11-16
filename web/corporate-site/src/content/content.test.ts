@@ -10,7 +10,7 @@ import * as pages from "@/content/pages";
 import * as products from "@/content/products";
 import * as projects from "@/content/projects";
 import { formatDate } from "@/lib/dates";
-import { CONTACT, NAV, ROUTES, whatsappHref } from "@/lib/site";
+import { CONTACT, NAV, ROUTES, telHref, whatsappHref } from "@/lib/site";
 
 /** Every string in the content modules, with the path it was found at. */
 function strings(value: unknown, path: string, out: { path: string; text: string }[] = []) {
@@ -228,13 +228,25 @@ describe("contact", () => {
     expect(whatsappHref(n)).toBe(`https://wa.me/${n.digits}`);
   });
 
-  it("numbers are never offered as telephone links", () => {
+  it("only the Nigerian number takes ordinary calls; Kuwait stays WhatsApp only", () => {
+    const callable = CONTACT.whatsapp.filter((n) => n.calls).map((n) => n.country);
+    expect(callable).toEqual(["Nigeria"]);
+  });
+
+  it.each(CONTACT.whatsapp)("$display: a call link only when the number takes calls", (n) => {
+    expect(telHref(n)).toBe(n.calls ? `tel:+${n.digits}` : null);
+  });
+
+  it("every telephone link is built by telHref, which checks the number takes calls", () => {
     const sources = (dir: string): string[] =>
       readdirSync(dir).flatMap((name) => {
         const file = join(dir, name);
         if (statSync(file).isDirectory()) return sources(file);
         return /\.tsx?$/.test(file) && !file.endsWith(".test.ts") ? [file] : [];
       });
-    for (const file of sources(join(process.cwd(), "src"))) expect(readFileSync(file, "utf8"), file).not.toMatch(/["'`]tel:/);
+    const site = join(process.cwd(), "src/lib/site.ts");
+    for (const file of sources(join(process.cwd(), "src"))) {
+      if (file !== site) expect(readFileSync(file, "utf8"), file).not.toMatch(/["'`]tel:/);
+    }
   });
 });
