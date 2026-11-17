@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { PageIntro } from "@/components/page-intro";
-import { SectionHead, sectionClass } from "@/components/section-head";
+import {
+  SectionHead,
+  deepSectionClass,
+  sectionClass,
+} from "@/components/section-head";
 import { StageMeter } from "@/components/stage-meter";
 import { ArrowIcon, ButtonLink } from "@/components/ui/button";
 import { PAGES } from "@/content/pages";
@@ -33,7 +37,9 @@ export default function ProductsPage() {
                   <h2 id={`${product.slug}-name`} className="type-heading-lg">
                     {product.name}
                   </h2>
-                  <p className="mt-4 type-body-lg text-ink-muted">{product.summary}</p>
+                  <p className="mt-4 type-body-lg text-ink-muted">
+                    {product.summary}
+                  </p>
                 </div>
                 <div className="lg:col-span-4 lg:col-start-9">
                   <StageMeter stage={product.stage} />
@@ -41,7 +47,9 @@ export default function ProductsPage() {
               </header>
               <div className="grid gap-8 p-6 sm:p-8 lg:grid-cols-12">
                 <div className="lg:col-span-6">
-                  <h3 className="type-label text-ink-muted">Development areas</h3>
+                  <h3 className="type-label text-ink-muted">
+                    Development areas
+                  </h3>
                   <ul className="brand-list mt-3">
                     {product.areas.map((area) => (
                       <li key={area}>{area}</li>
@@ -52,20 +60,36 @@ export default function ProductsPage() {
                   <h3 className="type-label text-ink-muted">Where it stands</h3>
                   <dl className="mt-3 border-t border-hairline">
                     {product.status.map((item) => (
-                      <div key={item.term} className="border-b border-hairline py-3">
-                        <dt className="type-body-sm font-medium">{item.term}</dt>
-                        <dd className="mt-1 type-body-sm text-ink-muted">{item.value}</dd>
+                      <div
+                        key={item.term}
+                        className="border-b border-hairline py-3"
+                      >
+                        <dt className="type-body-sm font-medium">
+                          {item.term}
+                        </dt>
+                        <dd className="mt-1 type-body-sm text-ink-muted">
+                          {item.value}
+                        </dd>
                       </div>
                     ))}
                   </dl>
                   <p className="mt-3 type-caption text-ink-muted">
-                    Checked against the product&apos;s repositories on <time dateTime={product.asOf}>{formatDate(product.asOf)}</time>.
+                    Checked against the product&apos;s repositories on{" "}
+                    <time dateTime={product.asOf}>
+                      {formatDate(product.asOf)}
+                    </time>
+                    .
                   </p>
                 </div>
               </div>
               {product.url && (
                 <footer className="border-t border-hairline px-6 py-4 sm:px-8">
-                  <ButtonLink variant="line" href={product.url} target="_blank" rel="noopener">
+                  <ButtonLink
+                    variant="line"
+                    href={product.url}
+                    target="_blank"
+                    rel="noopener"
+                  >
                     {product.urlLabel} <ArrowIcon />
                     <span className="sr-only">(opens in a new tab)</span>
                   </ButtonLink>
@@ -76,24 +100,29 @@ export default function ProductsPage() {
         </div>
       </section>
 
-      <section aria-labelledby="stages-title" className={sectionClass}>
+      <section aria-labelledby="stages-title" className={deepSectionClass}>
         <div className="wrap">
-          <SectionHead eyebrow="Stages" id="stages-title" title="The five stages.">
-            A product moves up one stage at a time, and only when the evidence for the next stage exists.
+          <SectionHead
+            eyebrow="Stages"
+            id="stages-title"
+            title="The five stages."
+          >
+            A product moves up one stage at a time, and only when the evidence
+            for the next stage exists.
           </SectionHead>
-          <ol className="grid border-t border-hairline sm:grid-cols-2 lg:grid-cols-5">
-            {STAGES.map((s, i) => (
+          <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+            {STAGES.map((s) => (
               <li
                 key={s.stage}
-                className={[
-                  "grid content-start gap-2 border-b border-hairline pt-6 pr-6 pb-8",
-                  i % 2 === 1 ? "sm:max-lg:border-l sm:max-lg:pl-6" : "",
-                  i % 5 !== 0 ? "lg:border-l lg:pl-6" : "",
-                ].join(" ")}
+                className="grid content-start gap-2 rounded-lg border border-deep-line bg-deep-surface p-5"
               >
-                <span className="type-mono-sm text-brand-text">{String(s.stage).padStart(2, "0")}</span>
-                <h3 className="type-body-lg font-medium">{s.name}</h3>
-                <p className="type-body-sm text-ink-muted">{s.text}</p>
+                <span className="type-mono-sm text-deep-brand">
+                  {String(s.stage).padStart(2, "0")}
+                </span>
+                <h3 className="type-body-lg font-medium text-deep-ink">
+                  {s.name}
+                </h3>
+                <p className="type-body-sm text-deep-muted">{s.text}</p>
               </li>
             ))}
           </ol>
