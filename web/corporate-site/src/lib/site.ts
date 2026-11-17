@@ -71,6 +71,7 @@ export const NAV: readonly NavItem[] = [
   { href: "/projects", label: "Projects" },
   { href: "/engineering", label: "Engineering" },
   { href: "/how-we-work", label: "How we work" },
+  { href: "/downloads", label: "Downloads" },
   { href: "/contact", label: "Contact" },
 ];
 
