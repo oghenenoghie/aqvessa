@@ -54,7 +54,7 @@ export default function DownloadsPage() {
 
       <section className={sectionClass}>
         <div className="wrap">
-          <SectionHead eyebrow="Security notice" title="Protect the root key.">
+          <SectionHead id="downloads-security-title" eyebrow="Security notice" title="Protect the root key.">
             This is an administrative security utility, not a general CBT installer. The Windows
             executable is not code-signed in this release pipeline, so verify its SHA-256 checksum
             and download it only from this official page or the linked CBT GitHub release.
