@@ -45,6 +45,12 @@ export const PAGES = {
     lead: "Three ways to engage us, five steps from enquiry to handover, and how pricing works.",
     description: "How Aqvessa works with clients: engagement models, the five delivery steps from enquiry to support, and how projects are priced.",
   },
+  downloads: {
+    label: "Downloads",
+    title: "CBT offline trust-root utility",
+    lead: "A Windows utility for authorised CBT administrators to generate the platform’s offline signing trust root on a dedicated local workstation.",
+    description: "Download the CBT offline trust-root setup utility for Windows and review its checksum and security instructions.",
+  },
   contact: {
     label: "Contact",
     title: "Make an enquiry",
