@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { PageIntro } from "@/components/page-intro";
 import { SectionHead, sectionClass } from "@/components/section-head";
 import { ArrowIcon, ButtonLink } from "@/components/ui/button";
-import { DELIVERY_STEPS, ENGAGEMENT_MODELS, PRICING_NOTE } from "@/content/how-we-work";
+import { Accordion, AccordionItem } from "@/components/ui/accordion";
+import { DELIVERY_STEPS, ENGAGEMENT_MODELS, FAQ, PRICING_NOTE } from "@/content/how-we-work";
 import { PAGES } from "@/content/pages";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -22,13 +23,27 @@ export default function HowWeWorkPage() {
           <SectionHead eyebrow="Engagement models" id="models-title" title="Three ways to work with us." />
           <ul className="grid gap-6 md:grid-cols-3">
             {ENGAGEMENT_MODELS.map((m) => (
-              <li key={m.name} className="grid content-start gap-4 rounded-md border border-hairline bg-surface p-6">
-                <h3 className="type-heading-md">{m.name}</h3>
-                <p className="type-body-sm text-ink-muted">{m.text}</p>
-                <p className="border-t border-hairline pt-4 type-body-sm">
-                  <span className="font-medium">Suits: </span>
-                  <span className="text-ink-muted">{m.fits}</span>
-                </p>
+              <li key={m.name} className="grid grid-rows-[auto_1fr_auto] gap-6 rounded-lg border border-hairline bg-surface p-6 sm:p-8">
+                <div className="grid gap-2">
+                  <h3 className="type-heading-md">{m.name}</h3>
+                  <p className="type-label text-brand-text">Priced after scoping</p>
+                  <p className="type-body-sm text-ink-muted">{m.text}</p>
+                </div>
+                <div className="grid content-start gap-4 border-t border-hairline pt-6">
+                  <h4 className="type-label text-ink-muted">Includes</h4>
+                  <ul className="brand-list">
+                    {m.includes.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                  <p className="type-body-sm">
+                    <span className="font-medium">Suits: </span>
+                    <span className="text-ink-muted">{m.fits}</span>
+                  </p>
+                </div>
+                <ButtonLink variant="line" href="/contact#enquiry" className="justify-self-stretch">
+                  Ask about this model <ArrowIcon />
+                </ButtonLink>
               </li>
             ))}
           </ul>
@@ -72,6 +87,31 @@ export default function HowWeWorkPage() {
               Start with an enquiry <ArrowIcon />
             </ButtonLink>
           </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="faq-title" className={sectionClass}>
+        <div className="wrap grid gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-4">
+            <p className="eyebrow">Questions</p>
+            <h2 id="faq-title" className="mt-4 type-heading-lg">
+              Before you enquire.
+            </h2>
+          </div>
+          <Accordion label="Frequently asked questions" className="lg:col-span-7 lg:col-start-6">
+            {FAQ.map((item, i) => (
+              <AccordionItem key={item.q} group="faq" title={item.q} defaultOpen={i === 0}>
+                <p>{item.a}</p>
+                {item.link && (
+                  <p className="mt-3">
+                    <a href={item.link.href} className="link">
+                      {item.link.label}
+                    </a>
+                  </p>
+                )}
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
       </section>
     </main>

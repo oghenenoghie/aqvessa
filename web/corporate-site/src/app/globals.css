@@ -355,6 +355,16 @@
   }
 }
 
+/* A ruled grid in the hairline token, faded towards the edges. Decorative only. */
+.grid-ruled {
+  background-image:
+    linear-gradient(to right, var(--hairline) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--hairline) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(ellipse at top right, #000 0%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at top right, #000 0%, transparent 70%);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
