@@ -12,6 +12,11 @@ They are unmodified.
 - ui-styling
 - ui-ux-pro-max
 
-The upstream licence text is in `LICENSE-ui-ux-pro-max`. Aqvessa's own design tokens in `DESIGN.md`
-and the `design-system-aqvessa` skill take precedence over any palette, font or style these
-skills suggest.
+The upstream licence text is in `LICENSE-ui-ux-pro-max`.
+
+## Precedence
+
+Decided by the founder on 19 November 2026: where these skills disagree with Aqvessa's own design
+guidance (`DESIGN.md` and the `design-system-aqvessa` skill) on palettes, fonts, styles or layout,
+these skills take precedence. `DESIGN.md` and `design-system-aqvessa` still apply wherever these
+skills are silent. The existing corporate site was built to the Aqvessa tokens and is unchanged.
