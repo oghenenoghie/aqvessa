@@ -13,7 +13,7 @@ export function Engineering() {
             <article
               key={p.tag}
               className={[
-                "group relative grid content-start gap-3 border-b border-hairline py-7 pr-6 transition-colors duration-200 hover:bg-surface",
+                "frontier-tile group relative grid content-start gap-3 rounded-md border border-hairline p-5 transition-colors duration-200 hover:border-brand",
                 i % 2 === 1 ? "sm:max-lg:border-l sm:max-lg:pl-6" : "",
                 i % 4 !== 0 ? "lg:border-l lg:pl-6" : "",
                 "lg:border-b-0",
