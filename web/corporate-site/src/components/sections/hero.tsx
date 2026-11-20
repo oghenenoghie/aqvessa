@@ -55,7 +55,7 @@ export function Hero() {
             <div className="frontier-orb">
               <div className="absolute inset-0 grid place-items-center">
                 <div className="grid place-items-center gap-2 text-center">
-                  <span className="type-label text-[#10150b]/70">AQVESSA</span>
+                  <span className="type-label text-[10px] tracking-[.12em] text-[#10150b]/70">AQVESSA LIMITED</span>
                   <span className="font-display text-5xl font-bold tracking-[-.08em] text-[#10150b] sm:text-7xl">A<span className="text-[#314b1c]">.</span></span>
                 </div>
               </div>
@@ -85,7 +85,7 @@ export function Hero() {
       <div className="border-t border-hairline bg-surface/60">
         <div className="wrap flex flex-wrap items-center justify-between gap-3 py-4 type-body-sm text-ink-muted">
           <span>AQvessa Limited <span aria-hidden="true" className="mx-2 text-hairline">/</span> Technology for what comes next</span>
-          <a href="/about" className="inline-flex items-center gap-2 font-medium text-ink no-underline hover:text-brand-text">Discover AQVESSA <ArrowIcon /></a>
+          <a href="/about" className="inline-flex items-center gap-2 font-medium text-ink no-underline hover:text-brand-text">Discover AQVESSA LIMITED <ArrowIcon /></a>
         </div>
       </div>
     </section>
