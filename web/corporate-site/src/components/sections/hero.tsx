@@ -54,7 +54,7 @@ export function Hero() {
           <dl className="rise mt-3 grid max-w-[520px] grid-cols-2 border-t border-hairline pt-6 [animation-delay:160ms]">
             {PROOF_POINTS.map((point, index) => (
               <div key={point.label} className={index === 1 ? "grid gap-1 border-l border-hairline pl-5 sm:pl-7" : "grid gap-1 pr-5 sm:pr-7"}>
-                <dd className="order-1 m-0 font-display text-3xl font-semibold tracking-tight tabular-nums text-ink sm:text-4xl">
+                <dd className="order-1 m-0 type-heading-lg tabular-nums text-ink sm:type-display-lg">
                   {point.value}
                 </dd>
                 <dt className="order-2 max-w-[150px] type-body-sm text-ink-muted">{point.label}</dt>
@@ -73,11 +73,11 @@ export function Hero() {
           </div>
 
           <ol className="grid">
-            {CAPABILITIES.map((item, index) => (
+            {CAPABILITIES.map((item) => (
               <li key={item.number} className="grid grid-cols-[44px_minmax(0,1fr)_20px] items-center gap-4 border-b border-hairline px-5 py-6 last:border-b-0 sm:px-7 sm:py-7">
                 <span className="type-mono-sm text-brand-text">{item.number}</span>
                 <div className="grid gap-1">
-                  <h2 className="font-display text-lg font-semibold tracking-tight text-ink sm:text-xl">{item.title}</h2>
+                  <h2 className="type-heading-md text-ink">{item.title}</h2>
                   <p className="type-body-sm max-w-[36ch] text-ink-muted">{item.detail}</p>
                 </div>
                 <span aria-hidden="true" className="type-body-lg text-ink-muted">↗</span>
