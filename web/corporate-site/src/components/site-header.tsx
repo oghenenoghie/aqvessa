@@ -4,29 +4,16 @@ import { NavLinks } from "@/components/nav-links";
 import { ButtonLink } from "@/components/ui/button";
 import { LINKS } from "@/lib/site";
 
-/**
- * Sticky header on `ground`. space-6 above and below the lockup keeps the height of the A clear
- * around it. The enquiry button is a line button: the primary in each view belongs to the page.
- */
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-50 border-b border-hairline bg-ground">
-      <a
-        href="#main"
-        className="sr-only rounded-md border border-hairline bg-surface px-4 py-2 text-ink focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50"
-      >
-        Skip to content
-      </a>
-      <div className="wrap relative flex items-center gap-6 py-6">
+    <header className="sticky top-0 z-50 border-b border-hairline bg-ground/85 backdrop-blur-xl">
+      <a href="#main" className="sr-only rounded-md border border-hairline bg-surface px-4 py-2 text-ink focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50">Skip to content</a>
+      <div className="wrap relative flex min-h-[84px] items-center gap-6">
         <Logo />
-        <nav aria-label="Primary" className="ml-auto hidden gap-1 nav:flex">
-          <NavLinks />
-        </nav>
-        <div className="hidden nav:flex">
-          <ButtonLink variant="line" href={LINKS.contact}>
-            Make an enquiry
-          </ButtonLink>
-        </div>
+        <span aria-hidden="true" className="hidden h-8 w-px bg-hairline sm:block" />
+        <span className="hidden type-mono-sm tracking-[.14em] text-ink-muted sm:block">DIGITAL FRONTIER</span>
+        <nav aria-label="Primary" className="ml-auto hidden items-center gap-1 nav:flex"><NavLinks /></nav>
+        <div className="hidden nav:flex"><ButtonLink href={LINKS.contact}>Let&apos;s talk <span aria-hidden="true">↗</span></ButtonLink></div>
         <MobileNav />
       </div>
     </header>
