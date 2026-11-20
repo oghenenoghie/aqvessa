@@ -171,7 +171,11 @@
 }
 @keyframes rise-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes orbit-turn { to { transform: rotateX(68deg) rotateZ(332deg); } }
+@keyframes frontier-ring-turn { to { transform: rotateX(68deg) rotateZ(336deg) scale(1.3); } }
+@keyframes frontier-ring-turn-reverse { to { transform: rotateX(68deg) rotateZ(-328deg) scale(1.45); } }
 @media (prefers-reduced-motion: no-preference) {
+  .frontier-orb::before { animation: frontier-ring-turn 48s linear infinite; }
+  .frontier-orb::after { animation: frontier-ring-turn-reverse 64s linear infinite; }
   .frontier-orbit { animation: orbit-turn 36s linear infinite; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -331,4 +335,59 @@
     transform: none !important;
     transition: none !important;
   }
+}
+
+
+/* Premium glass-crystal hero visual. Kept self-contained and dependency-free. */
+.crystal-stage {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  width: min(100%, 560px);
+  aspect-ratio: 1;
+  place-items: center;
+  perspective: 1100px;
+}
+.crystal-halo {
+  position: absolute;
+  inset: 14%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(183 255 98 / .095), rgb(183 255 98 / .025) 42%, transparent 72%);
+  filter: blur(28px);
+  pointer-events: none;
+}
+.crystal-object {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  transform-style: preserve-3d;
+  filter: drop-shadow(0 28px 34px rgb(0 0 0 / .28));
+  animation: crystal-float 9s ease-in-out infinite;
+  transition: transform 700ms cubic-bezier(.2,.7,.2,1);
+}
+.crystal-stage:hover .crystal-object {
+  transform: translateY(-4px) rotateY(-3deg) rotateX(2deg);
+}
+.crystal-caption {
+  position: absolute;
+  right: 5%;
+  bottom: 8%;
+  color: rgb(166 176 184 / .62);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: .16em;
+}
+@keyframes crystal-float {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -8px, 0); }
+}
+@media (max-width: 639px) {
+  .crystal-stage { width: min(100%, 440px); }
+  .crystal-caption { bottom: 5%; font-size: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .crystal-object { animation: none !important; transition: none !important; }
 }
