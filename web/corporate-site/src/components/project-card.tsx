@@ -60,7 +60,7 @@ export function ProjectCard({ project }: { project: Project }) {
 
         {project.problem ? (
           <div className="frontier-card-note grid gap-1 border-l-2 border-brand/70 pl-3">
-            <span className="type-label text-brand-text">The challenge</span>
+            <span className="type-label text-brand-text">Problem.</span>
             <p className="type-body-sm text-ink-muted">{project.problem}</p>
           </div>
         ) : null}
@@ -73,7 +73,7 @@ export function ProjectCard({ project }: { project: Project }) {
 
         {project.outcome ? (
           <p className="type-body-sm text-ink">
-            <span className="font-semibold text-brand-text">Outcome / </span><span className="text-ink-muted">{project.outcome}</span>
+            <span className="font-semibold text-brand-text">Outcome. </span><span className="text-ink-muted">{project.outcome}</span>
           </p>
         ) : null}
 
