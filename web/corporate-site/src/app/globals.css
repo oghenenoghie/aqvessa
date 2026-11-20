@@ -178,3 +178,7 @@
   html { scroll-behavior: auto; }
   *,*::before,*::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+/* The reversed AQVESSA lockup is the only lockup used on the always-dark canvas. */
+.theme-light-only { display: none; }
+.theme-dark-only { display: revert; }
