@@ -2,7 +2,8 @@ import { SectionHead, sectionClass } from "@/components/section-head";
 import { ArrowIcon } from "@/components/ui/button";
 import { PROJECT_GROUPS, WORKING_PROJECTS } from "@/content/projects";
 
-/** Home page summary of the projects page: one tile per group with its count. */
+const symbols: Record<string, string> = { products: "P", organisations: "O", demos: "D" };
+
 export function ProjectsBand() {
   return (
     <section aria-labelledby="projects-title" className={sectionClass}>
@@ -17,22 +18,29 @@ export function ProjectsBand() {
           </div>
           <a href="/projects" className="link type-body-sm font-medium">Explore the portfolio</a>
         </div>
-        <ul className="grid gap-4 md:grid-cols-3">
-          {PROJECT_GROUPS.map((group, index) => (
-            <li key={group.id}>
-              <a href={`/projects#${group.id}`} className="frontier-tile group grid h-full content-start gap-4 rounded-lg border border-hairline p-6 text-ink no-underline transition-[border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-brand focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand">
-                <div className="flex items-center justify-between">
-                  <span className="type-label text-ink-muted">{group.label}</span>
-                  <span className="type-mono-sm text-brand-text">0{index + 1}</span>
-                </div>
-                <span className="type-display-lg tabular-nums">{String(WORKING_PROJECTS.filter((p) => p.group === group.id).length).padStart(2, "0")}</span>
-                <span className="type-body-sm text-ink-muted">{group.intro}</span>
-                <span className="mt-2 inline-flex items-center gap-2 border-t border-hairline pt-4 type-body-sm font-medium text-brand-text [&_svg]:size-4">
-                  Browse this work <ArrowIcon />
-                </span>
-              </a>
-            </li>
-          ))}
+        <ul className="grid gap-5 md:grid-cols-3">
+          {PROJECT_GROUPS.map((group, index) => {
+            const count = WORKING_PROJECTS.filter((p) => p.group === group.id).length;
+            return (
+              <li key={group.id}>
+                <a href={`/projects#${group.id}`} className="frontier-card group relative grid h-full min-h-[280px] content-between overflow-hidden rounded-xl border border-hairline bg-surface p-6 text-ink no-underline transition-[border-color,transform,box-shadow] duration-300 hover:-translate-y-1 hover:border-brand hover:shadow-[0_18px_55px_rgb(0_0_0_/_0.24)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand sm:p-7">
+                  <div aria-hidden="true" className="frontier-card-grid absolute inset-0" />
+                  <div className="relative flex items-center justify-between gap-3">
+                    <span className="type-label text-brand-text">{group.label}</span>
+                    <span className="type-mono-sm text-ink-muted">0{index + 1} / 03</span>
+                  </div>
+                  <div className="relative grid gap-3">
+                    <span aria-hidden="true" className="frontier-card-glyph font-display text-8xl font-semibold leading-none tracking-[-.1em] text-brand/80">{symbols[group.id]}</span>
+                    <span className="type-display-lg tabular-nums">{String(count).padStart(2, "0")}</span>
+                    <span className="max-w-[32ch] type-body-sm text-ink-muted">{group.intro}</span>
+                  </div>
+                  <span className="relative mt-5 inline-flex items-center gap-2 border-t border-hairline pt-4 type-body-sm font-semibold text-brand-text [&_svg]:size-4">
+                    Browse collection <ArrowIcon />
+                  </span>
+                </a>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </section>
