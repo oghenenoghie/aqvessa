@@ -182,3 +182,19 @@
 /* The reversed AQVESSA lockup is the only lockup used on the always-dark canvas. */
 .theme-light-only { display: none; }
 .theme-dark-only { display: revert; }
+
+.frontier-tile {
+  position: relative; isolation: isolate; overflow: hidden;
+  background: linear-gradient(145deg, rgb(255 255 255 / .045), transparent 58%), var(--surface);
+}
+.frontier-tile::after {
+  content: ""; position: absolute; z-index: -1; width: 180px; height: 180px;
+  top: -100px; right: -70px; border-radius: 50%;
+  background: rgb(183 255 98 / .12); filter: blur(44px); opacity: .55;
+  transition: opacity 220ms var(--ease-standard), transform 220ms var(--ease-standard);
+}
+.frontier-tile:hover::after { opacity: 1; transform: scale(1.25); }
+.frontier-feature {
+  background: radial-gradient(ellipse at 100% 0%, rgb(183 255 98 / .11), transparent 44%),
+    linear-gradient(135deg, rgb(255 255 255 / .04), transparent 62%), var(--surface);
+}
