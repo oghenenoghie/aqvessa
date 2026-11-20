@@ -332,3 +332,42 @@
     transition: none !important;
   }
 }
+
+
+/* Cinematic Digital Frontier hero motion — subtle, GPU-friendly and optional. */
+.hero-status-dot { animation: hero-status-pulse 3.2s ease-in-out infinite; }
+.frontier-orb { animation: hero-orb-breathe 10s ease-in-out infinite; }
+.frontier-orb-sweep { position: absolute; z-index: 1; inset: 0; overflow: hidden; border-radius: inherit; pointer-events: none; }
+.frontier-orb-sweep::after {
+  content: ""; position: absolute; inset: -35% -70%;
+  background: linear-gradient(105deg, transparent 43%, rgb(239 255 220 / .2) 50%, transparent 57%);
+  transform: translateX(-75%); animation: hero-light-sweep 9s cubic-bezier(.4,0,.2,1) infinite;
+}
+.frontier-orbit, .frontier-orbit-two { position: absolute; z-index: 0; pointer-events: none; border-radius: 50%; }
+.motion-enabled .frontier-orbit { animation: hero-orbit-forward 42s linear infinite !important; }
+.motion-enabled .frontier-orbit-two { animation: hero-orbit-reverse 58s linear infinite !important; }
+.frontier-card:hover, .frontier-tile:hover {
+  transform: translateY(-4px); border-color: rgb(183 255 98 / .34);
+  box-shadow: 0 18px 44px rgb(0 0 0 / .2);
+}
+@keyframes hero-status-pulse {
+  0%, 100% { opacity: .78; box-shadow: 0 0 9px rgb(183 255 98 / .42); }
+  50% { opacity: 1; box-shadow: 0 0 20px rgb(183 255 98 / .82); }
+}
+@keyframes hero-orb-breathe {
+  0%, 100% { box-shadow: inset -34px -28px 80px rgb(0 0 0 / .72), inset 12px 10px 38px rgb(255 255 255 / .18), 0 0 68px rgb(183 255 98 / .1); }
+  50% { box-shadow: inset -34px -28px 80px rgb(0 0 0 / .72), inset 12px 10px 38px rgb(255 255 255 / .2), 0 0 100px rgb(183 255 98 / .2); }
+}
+@keyframes hero-light-sweep {
+  0%, 18% { transform: translateX(-75%); opacity: 0; }
+  28% { opacity: .8; }
+  48%, 100% { transform: translateX(75%); opacity: 0; }
+}
+@keyframes hero-orbit-forward { to { transform: rotateX(68deg) rotateZ(332deg); } }
+@keyframes hero-orbit-reverse { to { transform: rotateX(68deg) rotateZ(-318deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .hero-status-dot, .frontier-orb, .frontier-orb-sweep::after, .frontier-orbit, .frontier-orbit-two {
+    animation: none !important;
+  }
+  .frontier-card:hover, .frontier-tile:hover { transform: none; }
+}
