@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { OrganizationJsonLd } from "@/components/organization-json-ld";
+import { MotionEffects } from "@/components/motion-effects";
 import { BusinessCards } from "@/components/sections/business-cards";
 import { Contact } from "@/components/sections/contact";
 import { Engineering } from "@/components/sections/engineering";
@@ -24,6 +25,7 @@ export default function HomePage() {
   return (
     <main id="main" tabIndex={-1} className="focus:outline-none">
       <OrganizationJsonLd />
+      <MotionEffects />
       <Hero />
       <StatStrip />
       <BusinessCards />

@@ -13,8 +13,6 @@ const CAPABILITIES = [
 export function Hero() {
   return (
     <section aria-labelledby="hero-title" className="relative isolate overflow-hidden border-b border-hairline bg-ground">
-      <div aria-hidden="true" className="frontier-grid pointer-events-none absolute inset-0 -z-20" />
-      <div aria-hidden="true" className="frontier-glow pointer-events-none absolute -right-48 top-0 -z-10 size-[760px]" />
       <div className="wrap grid min-h-[700px] items-center gap-12 py-16 lg:grid-cols-[1.02fr_.98fr] lg:gap-8 lg:py-20">
         <div className="relative z-10 grid content-center gap-8">
           <div className="rise flex items-center gap-3">
@@ -48,10 +46,7 @@ export function Hero() {
         </div>
 
         <div className="relative mx-auto grid w-full max-w-[620px] place-items-center py-8 lg:py-0">
-          <div aria-hidden="true" className="frontier-glow absolute inset-0 scale-125" />
           <div className="relative grid w-full place-items-center">
-            <div className="frontier-orbit-two" />
-            <div className="frontier-orbit" />
             <div className="frontier-orb">
               <div className="absolute inset-0 grid place-items-center">
                 <div className="grid place-items-center gap-2 text-center">
