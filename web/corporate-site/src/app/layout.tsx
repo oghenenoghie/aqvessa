@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Inter_Tight, JetBrains_Mono } from "next/font/google";
+import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import type { ReactNode } from "react";
 import { IconSprite } from "@/components/icons";
 import { SiteFooter } from "@/components/site-footer";
@@ -8,8 +8,8 @@ import { UtilityBar } from "@/components/utility-bar";
 import { SITE } from "@/lib/site";
 import "./globals.css";
 
-const interTight = Inter_Tight({ subsets: ["latin"], weight: ["600", "700"], variable: "--font-inter-tight", display: "swap" });
-const inter = Inter({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-inter", display: "swap" });
+const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-space-grotesk", display: "swap" });
+const inter = Inter({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-inter", display: "swap" });
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], weight: ["400"], variable: "--font-jetbrains-mono", display: "swap" });
 
 export const metadata: Metadata = {
@@ -20,15 +20,13 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f6f4ef" },
-    { media: "(prefers-color-scheme: dark)", color: "#14161b" },
-  ],
+  themeColor: "#101318",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en-NG" className={`${interTight.variable} ${inter.variable} ${jetbrainsMono.variable}`}>
+    <html lang="en-NG" className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}>
       <body>
         <IconSprite />
         <UtilityBar />
