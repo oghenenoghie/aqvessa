@@ -171,7 +171,11 @@
 }
 @keyframes rise-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes orbit-turn { to { transform: rotateX(68deg) rotateZ(332deg); } }
+@keyframes frontier-ring-turn { to { transform: rotateX(68deg) rotateZ(336deg) scale(1.3); } }
+@keyframes frontier-ring-turn-reverse { to { transform: rotateX(68deg) rotateZ(-328deg) scale(1.45); } }
 @media (prefers-reduced-motion: no-preference) {
+  .frontier-orb::before { animation: frontier-ring-turn 48s linear infinite; }
+  .frontier-orb::after { animation: frontier-ring-turn-reverse 64s linear infinite; }
   .frontier-orbit { animation: orbit-turn 36s linear infinite; }
 }
 @media (prefers-reduced-motion: reduce) {
