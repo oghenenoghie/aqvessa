@@ -22,5 +22,5 @@ export function SectionHead({
   );
 }
 
-export const sectionClass = "border-t border-hairline py-16";
-export const deepSectionClass = "deep bg-deep py-16 text-deep-ink";
+export const sectionClass = "relative border-t border-hairline py-20";
+export const deepSectionClass = "deep relative overflow-hidden bg-deep py-20 text-deep-ink";
