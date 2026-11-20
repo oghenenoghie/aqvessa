@@ -1,123 +1,106 @@
 import { Fragment } from "react";
-import { FactList } from "@/components/fact-list";
-import { Icon } from "@/components/icons";
 import { ArrowIcon, ButtonLink } from "@/components/ui/button";
-import { CORPORATE_FACTS, FACTS_SOURCE, TAGLINE } from "@/content/company";
+import { TAGLINE } from "@/content/company";
+import { PRODUCTS } from "@/content/products";
+import { WORKING_PROJECTS } from "@/content/projects";
 import { LINKS } from "@/lib/site";
 
-const PROOF_POINTS = [
-  { value: "20", label: "projects with a working deployment" },
-  { value: "02", label: "products in development" },
-];
-
 const CAPABILITIES = [
-  { number: "01", title: "Software engineering", detail: "Enterprise software, SaaS products and platforms" },
-  { number: "02", title: "Technology solutions", detail: "Cloud infrastructure, data and cybersecurity" },
-  { number: "03", title: "Digital services", detail: "Web experiences, branding and digital growth" },
+  { number: "01", title: "Software engineering", detail: "Enterprise applications, SaaS products and business platforms" },
+  { number: "02", title: "Technology solutions", detail: "Cloud infrastructure, data systems and cybersecurity" },
+  { number: "03", title: "Digital services", detail: "Web experiences, digital strategy and business growth" },
 ];
 
+const PROOF_POINTS = [
+  { value: String(WORKING_PROJECTS.length).padStart(2, "0"), label: "projects with a working deployment" },
+  { value: String(PRODUCTS.length).padStart(2, "0"), label: "products in development" },
+];
+
+/**
+ * The homepage introduction. A light, editorial layout puts the company proposition first,
+ * then gives visitors a clear route into its capabilities and current work.
+ */
 export function Hero() {
   return (
-    <section aria-labelledby="hero-title" className="deep relative isolate overflow-hidden bg-deep text-deep-ink">
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute -right-40 -top-48 size-[34rem] rounded-full bg-[radial-gradient(circle,rgba(240,122,48,.18),transparent_68%)]" />
-        <div className="absolute -bottom-72 left-[28%] size-[38rem] rounded-full bg-[radial-gradient(circle,rgba(240,122,48,.09),transparent_68%)]" />
-        <div className="absolute inset-0 opacity-[.14] [background-image:linear-gradient(rgba(255,255,255,.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.08)_1px,transparent_1px)] [background-size:64px_64px] [mask-image:linear-gradient(to_bottom,black,transparent_88%)]" />
-      </div>
+    <section aria-labelledby="hero-title" className="border-b border-hairline bg-ground text-ink">
+      <div className="wrap grid items-center gap-12 py-16 sm:py-20 lg:min-h-[620px] lg:grid-cols-[minmax(0,1.08fr)_minmax(360px,.92fr)] lg:gap-16 lg:py-24">
+        <div className="grid content-center gap-7">
+          <p className="eyebrow rise">Technology · Software engineering · Digital innovation</p>
 
-      <div className="wrap grid items-center gap-12 pb-16 pt-14 sm:pb-20 sm:pt-20 lg:min-h-[620px] lg:grid-cols-[minmax(0,1.02fr)_minmax(0,.98fr)] lg:gap-16 lg:py-24">
-        <div className="grid gap-7">
-          <div className="rise flex w-fit items-center gap-2 rounded-full border border-deep-line bg-deep-surface/80 px-3 py-2 [animation-delay:30ms]">
-            <span className="size-2 rounded-full bg-deep-brand shadow-[0_0_14px_rgba(240,122,48,.8)]" />
-            <span className="type-label !text-[10px] !tracking-[.16em] text-deep-muted">Technology · Software · Digital innovation</span>
-          </div>
-
-          <div className="grid gap-5">
-            <h1 id="hero-title" className="rise max-w-[780px] font-display text-[clamp(3.25rem,7vw,5.7rem)] font-semibold leading-[.98] tracking-[-.065em] text-deep-ink [animation-delay:60ms]">
+          <div className="grid gap-6">
+            <h1 id="hero-title" className="rise max-w-[760px] font-display type-heading-lg sm:type-display-lg lg:type-display-xl [animation-delay:40ms]">
               {TAGLINE.map((line, i) => (
                 <Fragment key={line}>
                   {i > 0 && <br />}
-                  <span className={i === TAGLINE.length - 1 ? "text-deep-brand" : ""}>{line}</span>
-                  {i < TAGLINE.length - 1 && " "}
+                  {line}
+                  {i < TAGLINE.length - 1 ? " " : null}
                 </Fragment>
               ))}
             </h1>
-            <p className="rise max-w-[570px] text-[17px] leading-8 text-deep-muted [animation-delay:120ms] sm:text-lg">
+            <p className="rise max-w-[570px] type-body-lg text-ink-muted [animation-delay:80ms]">
               We design and build software products and digital solutions that help businesses work smarter, operate confidently and grow.
             </p>
           </div>
 
-          <div className="rise flex flex-wrap items-center gap-3 [animation-delay:180ms]">
-            <ButtonLink href={LINKS.contact} variant="deep-primary" className="!rounded-full !px-6">
+          <div className="rise flex flex-wrap items-center gap-3 [animation-delay:120ms]">
+            <ButtonLink href={LINKS.contact}>
               Start a conversation <ArrowIcon />
             </ButtonLink>
-            <ButtonLink href="/business" variant="line-deep" className="!rounded-full !px-6">
-              Explore what we do
+            <ButtonLink href="/business" variant="line">
+              Explore our business areas
             </ButtonLink>
           </div>
 
-          <div className="rise mt-3 grid max-w-[520px] grid-cols-2 gap-6 border-t border-deep-line pt-6 [animation-delay:240ms]">
-            {PROOF_POINTS.map((point) => (
-              <div key={point.label} className="flex items-center gap-3">
-                <span className="font-display text-3xl font-semibold tracking-tight text-deep-ink sm:text-4xl">{point.value}</span>
-                <span className="max-w-[130px] text-xs leading-5 text-deep-muted">{point.label}</span>
+          <dl className="rise mt-3 grid max-w-[520px] grid-cols-2 border-t border-hairline pt-6 [animation-delay:160ms]">
+            {PROOF_POINTS.map((point, index) => (
+              <div key={point.label} className={index === 1 ? "grid gap-1 border-l border-hairline pl-5 sm:pl-7" : "grid gap-1 pr-5 sm:pr-7"}>
+                <dd className="order-1 m-0 type-heading-lg tabular-nums text-ink sm:type-display-lg">
+                  {point.value}
+                </dd>
+                <dt className="order-2 max-w-[150px] type-body-sm text-ink-muted">{point.label}</dt>
               </div>
             ))}
-          </div>
+          </dl>
         </div>
 
-        <div className="rise relative mx-auto w-full max-w-[590px] [animation-delay:140ms]">
-          <div aria-hidden="true" className="absolute left-1/2 top-1/2 aspect-square w-[82%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-deep-line/80" />
-          <div aria-hidden="true" className="absolute left-1/2 top-1/2 aspect-square w-[64%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-deep-line" />
-
-          <div className="relative rounded-[1.75rem] border border-white/10 bg-[#1b2027]/90 p-4 shadow-[0_30px_100px_rgba(0,0,0,.35)] backdrop-blur-xl sm:p-6">
-            <div className="flex items-center justify-between border-b border-white/10 pb-4">
-              <div className="flex items-center gap-2">
-                <span className="size-2 rounded-full bg-[#f07a30]" />
-                <span className="type-label !text-[10px] !tracking-[.16em] text-deep-muted">The Aqvessa ecosystem</span>
-              </div>
-              <span className="type-mono-sm text-white/40">01 — 03</span>
+        <div className="rise grid gap-0 border-y border-hairline bg-surface [animation-delay:100ms]">
+          <div className="flex items-center justify-between gap-4 border-b border-hairline px-5 py-4 sm:px-7">
+            <div className="grid gap-1">
+              <span className="type-label text-brand-text">The Aqvessa ecosystem</span>
+              <span className="type-body-sm text-ink-muted">Technology shaped around business needs</span>
             </div>
+            <span className="type-mono-sm text-ink-muted">01 — 03</span>
+          </div>
 
-            <div className="grid gap-3 py-5">
-              {CAPABILITIES.map((item, index) => (
-                <div key={item.number} className="group grid grid-cols-[42px_minmax(0,1fr)_20px] items-center gap-3 rounded-2xl border border-white/[.07] bg-white/[.035] p-4 transition-colors hover:border-deep-brand/50 hover:bg-white/[.06] sm:p-5">
-                  <span className="grid size-10 place-items-center rounded-xl bg-deep-brand/10 font-mono text-xs text-deep-brand">{item.number}</span>
-                  <div className="grid gap-1">
-                    <h2 className="font-display text-base font-semibold text-deep-ink sm:text-lg">{item.title}</h2>
-                    <p className="text-xs leading-5 text-deep-muted sm:text-sm">{item.detail}</p>
-                  </div>
-                  <span className="text-lg text-white/25 transition-all group-hover:translate-x-1 group-hover:text-deep-brand">↗</span>
+          <ol className="grid">
+            {CAPABILITIES.map((item) => (
+              <li key={item.number} className="grid grid-cols-[44px_minmax(0,1fr)_20px] items-center gap-4 border-b border-hairline px-5 py-6 last:border-b-0 sm:px-7 sm:py-7">
+                <span className="type-mono-sm text-brand-text">{item.number}</span>
+                <div className="grid gap-1">
+                  <h2 className="type-heading-md text-ink">{item.title}</h2>
+                  <p className="type-body-sm max-w-[36ch] text-ink-muted">{item.detail}</p>
                 </div>
-              ))}
-            </div>
+                <span aria-hidden="true" className="type-body-lg text-ink-muted">↗</span>
+              </li>
+            ))}
+          </ol>
 
-            <div className="grid grid-cols-[1fr_auto] items-center gap-4 rounded-2xl bg-[#111419] p-4 sm:p-5">
-              <div className="grid gap-1">
-                <span className="type-label !text-[10px] !tracking-[.15em] text-deep-muted">Our approach</span>
-                <p className="text-sm font-medium text-deep-ink">Built around real business needs.</p>
-              </div>
-              <div className="grid size-11 place-items-center rounded-full border border-deep-brand/30 bg-deep-brand/10 text-deep-brand">
-                <Icon name="check" className="size-5" />
-              </div>
+          <div className="grid gap-2 border-t border-hairline bg-surface-sunk px-5 py-5 sm:grid-cols-[1fr_auto] sm:items-center sm:px-7">
+            <div className="grid gap-1">
+              <span className="type-label text-ink-muted">Our approach</span>
+              <p className="type-body font-medium text-ink">Practical engineering. Measurable outcomes.</p>
             </div>
-          </div>
-
-          <div className="absolute -bottom-5 -left-3 hidden rounded-2xl border border-white/10 bg-[#242a32] px-4 py-3 shadow-2xl sm:block lg:-left-8">
-            <p className="type-label !text-[9px] !tracking-[.14em] text-deep-muted">Product focus</p>
-            <p className="mt-1 text-sm font-semibold text-deep-ink">Plutus <span className="mx-1 text-white/25">·</span> Intelligent CBT</p>
-          </div>
-          <div className="absolute -right-2 -top-5 hidden rounded-xl border border-white/10 bg-[#242a32] px-4 py-3 shadow-2xl sm:block lg:-right-5">
-            <span className="block type-label !text-[9px] !tracking-[.14em] text-deep-muted">Engineering first</span>
-            <span className="mt-1 block text-xs font-medium text-deep-brand">Purposeful technology</span>
+            <a href="/engineering" className="link type-body-sm font-medium sm:justify-self-end">
+              How we build
+            </a>
           </div>
         </div>
       </div>
 
-      <div className="wrap border-t border-deep-line/80 py-4">
-        <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-deep-muted">
-          <p>AQvessa Limited <span className="mx-2 text-white/20">/</span> Incorporated in Nigeria under CAMA 2020</p>
-          <a href="/about" className="inline-flex items-center gap-2 transition-colors hover:text-deep-ink">
+      <div className="border-t border-hairline">
+        <div className="wrap flex flex-wrap items-center justify-between gap-3 py-4 type-body-sm text-ink-muted">
+          <p>AQvessa Limited <span aria-hidden="true" className="mx-2 text-hairline">/</span> Incorporated in Nigeria under CAMA 2020</p>
+          <a href="/about" className="inline-flex items-center gap-2 font-medium text-ink no-underline hover:text-brand-text">
             Company information <ArrowIcon />
           </a>
         </div>
