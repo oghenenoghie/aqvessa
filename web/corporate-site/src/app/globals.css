@@ -263,3 +263,72 @@
 @media (prefers-reduced-motion: reduce) {
   .frontier-card::after, .frontier-card-glyph { transition: none; }
 }
+
+
+/* Minimal Premium Motion: restrained, content-led movement. */
+@keyframes premium-enter {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.rise {
+  animation: premium-enter 480ms cubic-bezier(.2,.7,.2,1) both;
+}
+.frontier-orbit,
+.frontier-orbit-two {
+  animation: none !important;
+}
+.frontier-card,
+.frontier-tile {
+  transition:
+    transform 360ms cubic-bezier(.2,.7,.2,1),
+    border-color 360ms cubic-bezier(.2,.7,.2,1),
+    box-shadow 360ms cubic-bezier(.2,.7,.2,1);
+}
+.frontier-card::after,
+.frontier-tile::after {
+  opacity: 0 !important;
+  transform: none !important;
+}
+.frontier-card:hover .frontier-card-glyph {
+  transform: translateY(-2px);
+  text-shadow: none;
+}
+.frontier-card-glyph {
+  text-shadow: none;
+}
+.motion-enabled [data-motion-reveal] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 520ms cubic-bezier(.2,.7,.2,1),
+    transform 520ms cubic-bezier(.2,.7,.2,1);
+}
+.motion-enabled [data-motion-reveal].motion-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.motion-enabled [data-motion-card] {
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 460ms cubic-bezier(.2,.7,.2,1),
+    transform 460ms cubic-bezier(.2,.7,.2,1),
+    border-color 360ms cubic-bezier(.2,.7,.2,1),
+    box-shadow 360ms cubic-bezier(.2,.7,.2,1);
+}
+.motion-enabled [data-motion-card].motion-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.motion-enabled [data-motion-card]:nth-child(2) { transition-delay: 70ms; }
+.motion-enabled [data-motion-card]:nth-child(3) { transition-delay: 140ms; }
+.motion-enabled [data-motion-card]:nth-child(4) { transition-delay: 210ms; }
+@media (prefers-reduced-motion: reduce) {
+  .rise { animation: none !important; }
+  .motion-enabled [data-motion-reveal],
+  .motion-enabled [data-motion-card] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
