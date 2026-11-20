@@ -14,7 +14,7 @@ export function ProductsBand() {
         </SectionHead>
         <ul className="grid gap-5 lg:grid-cols-2">
           {PRODUCTS.map((product, index) => (
-            <li key={product.slug} className="group grid content-between gap-7 rounded-md border border-hairline bg-surface p-6 transition-colors duration-200 hover:border-brand sm:p-7">
+            <li key={product.slug} className="group grid content-between gap-7 frontier-tile rounded-lg border border-hairline p-6 transition-colors duration-200 hover:border-brand sm:p-7">
               <div className="grid content-start gap-5">
                 <div className="flex items-center justify-between gap-3 border-b border-hairline pb-4">
                   <span className="type-label text-brand-text">Product {String(index + 1).padStart(2, "0")}</span>

@@ -3,7 +3,7 @@ import { ArrowIcon } from "@/components/ui/button";
 import { BUSINESS_AREAS, type BusinessArea } from "@/content/business";
 
 const cardClass =
-  "group grid h-full content-start gap-4 rounded-md border border-hairline bg-surface text-ink no-underline transition-[border-color,background-color,transform] duration-200 hover:-translate-y-0.5 hover:border-brand hover:bg-brand-tint/20 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand";
+  "group grid h-full content-start gap-4 frontier-tile rounded-lg border border-hairline text-ink no-underline transition-[border-color,background-color,transform] duration-200 hover:-translate-y-0.5 hover:border-brand hover:bg-brand-tint/20 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand";
 
 function More({ children = "Explore capability" }: { children?: string }) {
   return (

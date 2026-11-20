@@ -20,7 +20,7 @@ export function ProjectsBand() {
         <ul className="grid gap-4 md:grid-cols-3">
           {PROJECT_GROUPS.map((group, index) => (
             <li key={group.id}>
-              <a href={`/projects#${group.id}`} className="group grid h-full content-start gap-4 border border-hairline bg-surface p-6 text-ink no-underline transition-[border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-brand focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand">
+              <a href={`/projects#${group.id}`} className="frontier-tile group grid h-full content-start gap-4 rounded-lg border border-hairline p-6 text-ink no-underline transition-[border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-brand focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand">
                 <div className="flex items-center justify-between">
                   <span className="type-label text-ink-muted">{group.label}</span>
                   <span className="type-mono-sm text-brand-text">0{index + 1}</span>
