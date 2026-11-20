@@ -18,7 +18,7 @@ export function Hero() {
       <div className="wrap grid min-h-[700px] items-center gap-12 py-16 lg:grid-cols-[1.02fr_.98fr] lg:gap-8 lg:py-20">
         <div className="relative z-10 grid content-center gap-8">
           <div className="rise flex items-center gap-3">
-            <span className="size-2 rounded-full bg-brand shadow-[0_0_18px_var(--brand)]" />
+            <span aria-hidden="true" className="hero-status-dot size-2 rounded-full bg-brand shadow-[0_0_18px_var(--brand)]" />
             <p className="type-label text-brand-text">Independent digital innovation company</p>
           </div>
           <div className="grid gap-6">
@@ -50,8 +50,8 @@ export function Hero() {
         <div className="relative mx-auto grid w-full max-w-[620px] place-items-center py-8 lg:py-0">
           <div aria-hidden="true" className="frontier-glow absolute inset-0 scale-125" />
           <div className="relative grid w-full place-items-center">
-            <div className="frontier-orbit-two" />
-            <div className="frontier-orbit" />
+            <div aria-hidden="true" className="frontier-orbit-two" />
+            <div aria-hidden="true" className="frontier-orbit" />
             <div className="frontier-orb">
               <div className="absolute inset-0 grid place-items-center">
                 <div className="grid place-items-center gap-2 text-center">
