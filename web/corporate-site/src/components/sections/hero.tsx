@@ -10,6 +10,68 @@ const CAPABILITIES = [
   { number: "03", title: "Technology engineering", detail: "Cloud, data and dependable digital infrastructure." },
 ];
 
+function CrystalVisual() {
+  return (
+    <div className="crystal-stage" role="img" aria-label="A floating clear glass crystal sphere with a subtle lime reflection">
+      <div className="crystal-halo" aria-hidden="true" />
+      <svg
+        className="crystal-object"
+        viewBox="0 0 560 560"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+      >
+        <defs>
+          <radialGradient id="crystal-body" cx="34%" cy="25%" r="76%">
+            <stop offset="0" stopColor="#FFFFFF" stopOpacity=".94" />
+            <stop offset=".16" stopColor="#EAF4F0" stopOpacity=".55" />
+            <stop offset=".42" stopColor="#A8C3C0" stopOpacity=".16" />
+            <stop offset=".72" stopColor="#DDE8E5" stopOpacity=".07" />
+            <stop offset="1" stopColor="#F5FFF9" stopOpacity=".24" />
+          </radialGradient>
+          <linearGradient id="crystal-rim" x1="94" y1="102" x2="470" y2="458" gradientUnits="userSpaceOnUse">
+            <stop stopColor="#FFFFFF" stopOpacity=".9" />
+            <stop offset=".34" stopColor="#DDEBE6" stopOpacity=".12" />
+            <stop offset=".68" stopColor="#B7FF62" stopOpacity=".5" />
+            <stop offset="1" stopColor="#FFFFFF" stopOpacity=".58" />
+          </linearGradient>
+          <linearGradient id="crystal-reflection" x1="360" y1="126" x2="454" y2="398" gradientUnits="userSpaceOnUse">
+            <stop stopColor="#D9FFAB" stopOpacity="0" />
+            <stop offset=".48" stopColor="#B7FF62" stopOpacity=".28" />
+            <stop offset="1" stopColor="#B7FF62" stopOpacity="0" />
+          </linearGradient>
+          <linearGradient id="crystal-highlight" x1="140" y1="115" x2="300" y2="330" gradientUnits="userSpaceOnUse">
+            <stop stopColor="white" stopOpacity=".88" />
+            <stop offset="1" stopColor="white" stopOpacity="0" />
+          </linearGradient>
+          <filter id="crystal-blur" x="0" y="0" width="560" height="560" filterUnits="userSpaceOnUse">
+            <feGaussianBlur stdDeviation="18" />
+          </filter>
+          <clipPath id="crystal-clip">
+            <circle cx="280" cy="280" r="188" />
+          </clipPath>
+        </defs>
+        <ellipse cx="280" cy="488" rx="132" ry="18" fill="#000000" fillOpacity=".34" filter="url(#crystal-blur)" />
+        <g className="crystal-shell">
+          <circle cx="280" cy="280" r="190" fill="url(#crystal-body)" />
+          <circle cx="280" cy="280" r="188.5" stroke="url(#crystal-rim)" strokeWidth="2.5" />
+          <g clipPath="url(#crystal-clip)">
+            <ellipse cx="195" cy="162" rx="118" ry="70" transform="rotate(-29 195 162)" fill="url(#crystal-highlight)" opacity=".54" />
+            <path d="M370 84C437 144 470 229 455 314C444 377 413 430 368 465" stroke="url(#crystal-reflection)" strokeWidth="42" strokeLinecap="round" />
+            <path d="M130 270C166 181 235 125 319 105" stroke="white" strokeOpacity=".46" strokeWidth="2" strokeLinecap="round" />
+            <path d="M142 343C180 411 250 454 323 457" stroke="white" strokeOpacity=".16" strokeWidth="1.5" strokeLinecap="round" />
+            <path d="M111 218C123 178 148 143 181 119" stroke="white" strokeOpacity=".62" strokeWidth="5" strokeLinecap="round" />
+            <circle cx="164" cy="137" r="5" fill="white" fillOpacity=".8" />
+            <circle cx="177" cy="126" r="2.5" fill="white" fillOpacity=".7" />
+          </g>
+          <circle cx="280" cy="280" r="190" stroke="white" strokeOpacity=".14" strokeWidth="1" />
+        </g>
+      </svg>
+      <span className="crystal-caption" aria-hidden="true">AQVESSA / DIGITAL SYSTEMS</span>
+    </div>
+  );
+}
+
 export function Hero() {
   return (
     <section aria-labelledby="hero-title" className="relative isolate overflow-hidden border-b border-hairline bg-ground">
@@ -46,25 +108,8 @@ export function Hero() {
         </div>
 
         <div className="relative mx-auto grid w-full max-w-[620px] place-items-center py-8 lg:py-0">
-          <div className="relative grid w-full place-items-center">
-            <div className="frontier-orb">
-              <div className="absolute inset-0 grid place-items-center">
-                <div className="grid place-items-center gap-2 text-center">
-                  <span className="type-label text-[10px] tracking-[.12em] text-[#10150b]/70">AQVESSA LIMITED</span>
-                  <span className="font-display text-5xl font-bold tracking-[-.08em] text-[#10150b] sm:text-7xl">A<span className="text-[#314b1c]">.</span></span>
-                </div>
-              </div>
-            </div>
-            <div className="frontier-panel absolute -left-1 top-[18%] hidden max-w-[190px] gap-2 rounded-lg p-4 sm:grid">
-              <span className="type-mono-sm text-brand-text">SYSTEM / 001</span>
-              <span className="type-body-sm font-medium text-ink">Design with intent. Build with precision.</span>
-            </div>
-            <div className="frontier-panel absolute -right-1 bottom-[13%] hidden max-w-[190px] gap-2 rounded-lg p-4 sm:grid">
-              <span className="type-mono-sm text-brand-text">STATUS / ACTIVE</span>
-              <span className="type-body-sm font-medium text-ink">From first idea to deployed product.</span>
-            </div>
-          </div>
-          <div className="mt-8 grid w-full max-w-[460px] gap-0 border-y border-hairline sm:mt-2">
+          <CrystalVisual />
+          <div className="mt-2 grid w-full max-w-[460px] gap-0 border-y border-hairline">
             {CAPABILITIES.map((item) => (
               <div key={item.number} className="grid grid-cols-[44px_1fr] gap-3 border-b border-hairline py-4 last:border-b-0">
                 <span className="type-mono-sm text-brand-text">{item.number}</span>
