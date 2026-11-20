@@ -17,6 +17,7 @@ export const metadata: Metadata = {
   title: { default: `${SITE.name}: technology and software engineering`, template: `%s · ${SITE.name}` },
   description: SITE.description,
   applicationName: SITE.name,
+  verification: { google: "RTjMzl1aGpbuCn3-YpavWwliZiJKSQrwIECxU-WPPW4" },
 };
 
 export const viewport: Viewport = {
