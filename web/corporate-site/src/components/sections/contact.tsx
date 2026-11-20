@@ -59,7 +59,7 @@ export function Contact() {
           </ul>
         </div>
         <div className="grid gap-4">
-          <ul className="overflow-hidden rounded-lg border border-deep-line">
+          <ul className="frontier-panel overflow-hidden rounded-lg border border-deep-line">
             {ROWS.map((r) => (
               <Fragment key={r.href}>
               <li
