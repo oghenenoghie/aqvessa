@@ -5,13 +5,13 @@
 **Product:** Aqvessa Technologies, the technology arm of AQVESSA LIMITED
 **Surface types:** corporate website, product interfaces (SaaS, internal tools), proposals and documents
 **Audience:** Business owners, finance and HR leads and institutions in Nigeria and across Africa first, then buyers in the Gulf and Europe
-**Brand character:** Calm, heavy and exact. A warm off-white page, near-black type, one confident orange, small corners and lines instead of shadows.
-**Status:** Proposed identity, November 2026. Colours are sampled from the supplied logo files. The type, spacing, radius and motion values are recommendations. No component has been built yet.
+**Brand character:** Calm, heavy and exact. A near-black canvas, off-white type, one lime accent, small corners and lines instead of shadows.
+**Status:** November 2026. The corporate site (`web/corporate-site`) is built on the dark lime palette below, using the November 2026 logo. The colour and radius values match `src/app/globals.css`. The type and motion values are recommendations. The earlier orange palette is retired.
 
 ### Design Principles
 
 - Evidence over adjectives. Show the figure, the date or the step, and leave the superlative out.
-- One orange moment per view. The logo uses its colour once, and so should a screen.
+- Lime marks what matters. The logo uses one accent colour, and a screen should use it with the same restraint.
 - Lines, not shadows. Structure comes from hairlines, space and type weight.
 - Quiet interface, loud logo. Product screens stay neutral so the brand carries the identity.
 
@@ -23,44 +23,53 @@
 
 ## Colors
 
-Every colour has a light and a dark value. Reference tokens by name, never by hex.
+The site is dark only (`color-scheme: dark`). Reference tokens by name, never by hex.
 
-| Token | Light | Dark | Role |
-|-------|-------|------|------|
-| ground | `#f6f4ef` | `#14161b` | Page background |
-| surface | `#fffdfa` | `#1d2026` | Cards, panels, fields |
-| surface-sunk | `#ebe8e0` | `#0f1115` | Table headers, code blocks, input wells |
-| hairline | `#d9d5cb` | `#2c3139` | 1px dividers and borders (decorative) |
-| ink | `#16181d` | `#f6f4ef` | Primary text |
-| ink-muted | `#5b6472` | `#a7b0bf` | Secondary text |
-| brand | `#c84e0a` | `#f07a30` | Fills only: primary buttons, identity blocks, chart marks |
-| brand-text | `#b5440a` | `#f07a30` | Orange used as text or a thin line: links, active labels |
-| on-brand | `#ffffff` | `#1a0c04` | Text on a brand fill |
-| brand-deep | `#9a3b07` | `#ff9a5c` | Hover and pressed state for brand |
-| brand-tint | `#fae8dc` | `#3a1f10` | Selected rows, soft highlights |
-| signal-success | `#1f6b45` | `#5fc08a` | Confirmed, paid, healthy |
-| signal-warning | `#7a5b00` | `#e3b341` | Pending, expiring |
-| signal-danger | `#a3262d` | `#f08a8f` | Failed, overdue, destructive |
+| Token | Value | Role |
+|-------|-------|------|
+| ground | `#101318` | Page background |
+| surface | `#191e25` | Cards, panels, fields |
+| surface-sunk | `#0b0f14` | Table headers, code blocks, input wells |
+| hairline | `#303943` | 1px dividers and borders (decorative) |
+| ink | `#f3f6f0` | Primary text |
+| ink-muted | `#a6b0b8` | Secondary text |
+| brand | `#b7ff62` | Lime: fills, links, active labels, focus rings, chart marks |
+| brand-text | `#b7ff62` | Lime used as text or a thin line |
+| on-brand | `#10150b` | Text on a brand fill |
+| brand-deep | `#9be94b` | Hover and pressed state for brand |
+| brand-tint | `#26351b` | Selected rows, soft highlights |
+| signal-success | `#76d9a0` | Confirmed, paid, healthy |
+| signal-warning | `#f0c76a` | Pending, expiring |
+| signal-danger | `#ff858b` | Failed, overdue, destructive |
+| deep | `#090c10` | Deepest band: footer, reversed sections |
+| deep-surface | `#11171d` | Cards on the deep band |
+| deep-line | `#28313a` | Dividers on the deep band |
+| deep-ink / deep-muted | `#f3f6f0` / `#a6b0b8` | Text on the deep band |
+| deep-brand / on-deep-brand | `#b7ff62` / `#10150b` | Lime fill and its text on the deep band |
+
+No light theme is defined. For documents on a light ground, use the single-colour ink lockup on `#f6f4ef` with dark ink text. Do not set lime as text or a thin line on a light ground: it fails contrast.
 
 ### Contrast checks
 
-| Pair | Light | Dark |
-|------|-------|------|
-| ink on ground | 16.2:1 | 16.5:1 |
-| ink-muted on ground | 5.4:1 | 8.3:1 |
-| brand-text on ground | 5.0:1 | 6.5:1 |
-| brand-text on surface | 5.5:1 | 5.9:1 |
-| on-brand on brand | 4.6:1 | 6.9:1 |
-| brand as text on ground | 4.2:1, fails | 6.5:1 |
-
-The last row is why `brand-text` exists. In light mode `brand` is for fills only.
+| Pair | Ratio |
+|------|-------|
+| ink on ground | 17.1:1 |
+| ink-muted on ground | 8.4:1 |
+| ink-muted on surface | 7.6:1 |
+| brand on ground | 15.5:1 |
+| brand on surface | 14.0:1 |
+| on-brand on brand | 15.4:1 |
+| on-brand on brand-deep | 12.5:1 |
+| ink on brand-tint | 12.0:1 |
+| deep-ink on deep | 18.0:1 |
+| hairline on ground | 1.6:1, decorative only |
 
 ### Colour rules
 
-- Orange covers about one tenth of any screen at most.
+- Lime covers a small part of any screen: calls to action, links, active states and the logo's A.
 - Signal colours always appear with a text label or icon. Never rely on colour alone.
-- `signal-danger` sits close to brand orange in hue. Never use brand orange for errors or warnings.
-- The logo orange and ink are fixed. Do not tint or recolour the logo.
+- Never use lime for errors or warnings.
+- The logo's lime and off-white are fixed. Do not tint or recolour the logo.
 
 ## Typography
 
@@ -92,7 +101,7 @@ The last row is why `brand-text` exists. In light mode `brand` is for fills only
 
 ## Shapes
 
-**Border radius:** `radius-sm: 2px` (identity blocks, tags) · `radius-md: 4px` (buttons, inputs, cards) · `radius-lg: 8px` (modals, large panels)
+**Border radius:** `radius-sm: 2px` (identity blocks, tags) · `radius-md: 6px` (buttons, inputs, cards) · `radius-lg: 12px` (modals, large panels)
 
 App-store icons are the one exception and use the large rounded tile supplied with the logo. Do not copy that radius into the interface.
 
@@ -102,30 +111,29 @@ None. Aqvessa uses a 1px `hairline` border on `surface` instead of a shadow. Ove
 
 ## Motion
 
-Proposed values, not yet in the token file.
+Recommended values. The site defines `--ease-standard` in `globals.css`; durations are not yet tokens.
 
 - **duration-fast:** `120ms` for hover and press feedback
 - **duration-base:** `200ms` for fades and small slides
-- **easing:** `cubic-bezier(0.4, 0, 0.2, 1)`
+- **easing:** `cubic-bezier(0.2, 0.7, 0.2, 1)`
 - No bouncing, looping or parallax. When `prefers-reduced-motion` is set, remove movement and keep only opacity changes.
 
 ## Focus
 
-A 2px outline in `brand-text`, offset 3px, on every interactive element when focused by keyboard. It must reach 3:1 against its surroundings in both themes.
+A 2px outline in `brand`, offset 4px, on every interactive element when focused by keyboard. It must reach 3:1 against its surroundings on `ground` and on the `deep` band.
 
 ## Logo
 
 | File | Use | Ground |
 |------|-----|--------|
-| aqvessa-technologies-primary | Full lockup | Light ground |
-| aqvessa-technologies-reversed | Full lockup | Dark ground |
-| aqvessa-compact-mark | A with ring, for favicons, avatars, anything under 120px wide | Light ground |
-| aqvessa-app-icon-orange, aqvessa-app-icon-ink | App store icons | Platform |
+| aqvessa-technologies-dark | Full lockup: lime A, off-white wordmark | Dark ground |
+| aqvessa-technologies-ink | Full lockup: single colour ink | Light ground |
+| aqvessa-mark-and-icon | Sheet: app icon tiles (lime, dark, light) and the bare A at three sizes | Platform |
 
 - Clear space: the height of the A on every side.
-- Minimum width for the full lockup: 120px. Below that, switch to the compact mark.
+- Minimum width for the full lockup: 120px. Below that, switch to the bare A with its ring.
 - Do not recolour the A, alter the ring, set the word in capitals, stretch the lockup, or place it on a busy photograph.
-- The current files are PNGs on opaque grounds. Vector and transparent masters are still needed.
+- The files are PNGs on opaque grounds. Vector and transparent masters are still needed.
 
 ## Components
 
@@ -149,7 +157,7 @@ Proposed starting set. None is built.
 - Define all interactive states: default, hover, focus-visible, active, disabled.
 - Use the spacing scale for all padding, margin and gap values.
 - Write content in sentence case. Reserve capitals for `label`, `descriptor` and acronyms.
-- Design the dark theme on purpose and test every component in both themes.
+- Design every component on `ground` and on the `deep` band, and test both.
 - Test every component at the smallest and largest breakpoint before shipping.
 
 ### Don't
@@ -158,7 +166,7 @@ Proposed starting set. None is built.
 - Do not use arbitrary spacing values.
 - Do not mix border-radius values beyond the three defined.
 - Do not use shadows for structure.
-- Do not use brand orange for errors, warnings or body text.
+- Do not use lime for errors, warnings or body text.
 - Do not stack more than one primary button in a view.
 - Do not make claims about clients, awards, scale or certifications that cannot be shown.
 
@@ -173,7 +181,7 @@ When creating or updating a component guideline for this system, follow this seq
 1. **State the intent.** One sentence on what the component does and why it exists.
 2. **Map tokens.** List every colour, spacing, typography and radius token it uses. No raw values.
 3. **Define anatomy.** Break it into named parts with their token assignments.
-4. **Specify states.** Default, hover, focus-visible, active, disabled, loading, error, empty. Cover both themes.
+4. **Specify states.** Default, hover, focus-visible, active, disabled, loading, error, empty. Cover `ground` and the `deep` band.
 5. **Describe interactions.** Keyboard, pointer and touch, including long content, overflow and truncation.
 6. **Add accessibility criteria.** Testable pass/fail checks, such as "focus ring must reach 3:1 contrast".
 7. **List anti-patterns.** Concrete misuse with a reason for each.
@@ -184,7 +192,7 @@ When creating or updating a component guideline for this system, follow this seq
 Every component guideline must contain these sections, in order:
 
 1. Overview: purpose, when to use, when not to use.
-2. Tokens and foundations: every token used, with light and dark values.
+2. Tokens and foundations: every token used, with its value.
 3. Anatomy and variants: named parts, variant matrix, responsive behaviour.
 4. States and interactions: full state table and keyboard, pointer and touch behaviour.
 5. Accessibility: ARIA, contrast, focus management, screen-reader behaviour.
@@ -196,7 +204,7 @@ Every component guideline must contain these sections, in order:
 Every component must:
 
 - Reference only tokens defined above. No hardcoded hex, px or font values.
-- Define all interactive states in both light and dark themes.
+- Define all interactive states on `ground` and on the `deep` band.
 - Specify behaviour at the smallest and largest supported breakpoint.
 - Handle empty state, overflow, truncation and maximum content length.
 - Support keyboard navigation (Tab, Enter, Escape, arrow keys where applicable).
@@ -208,7 +216,7 @@ Every component must:
 
 A component is not complete until every item is checked:
 
-- Renders correctly in its default state in both themes.
+- Renders correctly in its default state on `ground` and on `deep`.
 - All states documented and visually verified.
 - All visual values use design tokens, with zero hardcoded values.
 - Keyboard navigation works without a pointer.
@@ -219,8 +227,8 @@ A component is not complete until every item is checked:
 
 ## Open items
 
-- Vector (SVG) and transparent masters of the lockup, reversed lockup and compact mark.
-- Confirmation of the orange and ink colourway, and of the logo's typeface.
+- Vector (SVG) and transparent masters of the lockups and the mark.
+- Confirmation of the lime colourway and of the logo's typeface.
 - Legal check on "Technologies" and any other descriptors.
 - Motion values to be added to the token file.
 - Arabic support (IBM Plex Sans Arabic or Noto Sans Arabic) if the Gulf market needs it.
