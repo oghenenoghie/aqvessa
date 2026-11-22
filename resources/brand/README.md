@@ -6,19 +6,17 @@ Logo files and design tokens for Aqvessa. The full rules are in [`DESIGN.md`](..
 
 | Path | What it is |
 | --- | --- |
-| `tokens.json` | Colour (light and dark), type, spacing and radius tokens |
-| `logos/aqvessa-technologies-primary.png` | Full lockup for light grounds (`#f6f4ef`) |
-| `logos/aqvessa-technologies-reversed.png` | Full lockup for dark grounds (`#14161b`) |
-| `logos/aqvessa-compact-mark.png` | The A with its ring, for favicons, avatars and spaces under 120px wide |
-| `logos/aqvessa-compact-mark-size-test.png` | The compact mark at three sizes, for checking how small it can go |
-| `logos/aqvessa-app-icon-orange.png` | App icon: off-white A on an orange tile |
-| `logos/aqvessa-app-icon-ink.png` | App icon: orange A on a near-black tile |
+| `tokens.json` | Colour (dark canvas), type, spacing and radius tokens |
+| `logos/aqvessa-technologies-dark.png` | Full lockup for dark grounds (`#101318`): lime A, off-white wordmark |
+| `logos/aqvessa-technologies-ink.png` | Full lockup for light grounds (`#f6f4ef`): single colour ink |
+| `logos/aqvessa-mark-and-icon.png` | Sheet with the app icon tiles (lime, dark, light) and the bare A at three sizes, for favicons, avatars and spaces under 120px wide |
 
 ## Notes
 
-- All logo files are PNG crops on opaque backgrounds. There are no transparent versions and no vectors yet, so place each on the ground it was drawn on.
-- Colours are sampled from the supplied images, not from a master file: orange `#c84e0a` on light and `#f07a30` on dark, ink `#14161b`, slate `#5b6472` on light and `#a7b0bf` on dark.
-- Clear space is the height of the A on every side. Keep the full lockup at 120px wide or more, and use the compact mark below that.
+- All logo files are 2560 x 1280 PNGs on opaque backgrounds. There are no transparent versions and no vectors yet, so place each on the ground it was drawn on.
+- The site's own copies are in `web/corporate-site/public/brand/` (lockups, cropped to 580 x 180 on the site's ground colours) and `web/corporate-site/src/app/` (`icon.png`, `apple-icon.png`, `opengraph-image.png`).
+- Colours match `web/corporate-site/src/app/globals.css`: lime `#b7ff62`, ground `#101318`, ink `#f3f6f0`, muted `#a6b0b8`.
+- Clear space is the height of the A on every side. Keep the full lockup at 120px wide or more, and use the bare A below that.
 - The app icon tiles have rounded corners for app-store use. Do not copy that radius onto other interface elements.
 - Write **Aqvessa** in running text and **AQVESSA LIMITED** in legal documents.
 
