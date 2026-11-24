@@ -114,9 +114,12 @@ describe("products", () => {
     }
   });
 
-  it("no product claims a stage beyond under development without saying why", () => {
+  it("no product claims a stage beyond completed without saying why", () => {
     // Raising a stage is a deliberate decision: update this test with the evidence when it happens.
-    for (const product of products.PRODUCTS) expect(product.stage).toBeLessThanOrEqual(2);
+    // Plutus moved to stage 3 (completed) on 2026-11-24 on the owner's confirmation that the project is finished.
+    // Stages 4 and 5 need test evidence and live business use, which the repositories do not yet show.
+    for (const product of products.PRODUCTS) expect(product.stage).toBeLessThanOrEqual(3);
+    expect(products.PRODUCTS.find((p) => p.slug === "intelligent-cbt")?.stage).toBe(2);
   });
 
   it("stages are numbered one to five in order", () => {
@@ -167,8 +170,8 @@ describe("projects", () => {
       "Live",
       "Deployed",
       "Deployed, on request",
-      "Development build, deployed for testing",
-      "Development build, published for testing",
+      "Completed, deployed for testing",
+      "Completed, installers published",
       "In development",
     ];
     for (const p of projects.PROJECTS) {
@@ -193,11 +196,11 @@ describe("projects", () => {
 
   it("Plutus is described the same way on the products and projects pages", () => {
     const plutus = products.PRODUCTS.find((p) => p.slug === "plutus");
-    expect(plutus?.stage).toBe(2);
+    expect(plutus?.stage).toBe(3);
     for (const slug of ["plutus-cloud", "plutus-desktop", "wagebook"]) {
       const project = projects.PROJECTS.find((p) => p.slug === slug);
       expect(project?.stage, slug).toBe(plutus?.stage);
-      expect(project?.status, slug).toMatch(/^Development build/);
+      expect(project?.status, slug).toMatch(/^Completed/);
     }
     expect(plutus?.status.map((s) => s.value).join(" ")).toMatch(/Wagebook/);
   });

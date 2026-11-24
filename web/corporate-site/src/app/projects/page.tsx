@@ -34,7 +34,7 @@ export default function ProjectsPage() {
               counted, because it is still in development.
             </p>
             <p>
-              &ldquo;Deployed&rdquo; means the latest production build succeeded. &ldquo;Development build&rdquo; means a build we use for
+              &ldquo;Deployed&rdquo; means the latest production build succeeded. &ldquo;Completed&rdquo; means the product is feature-complete for its release and may still be in testing. &ldquo;Development build&rdquo; means a build we use for
               testing, not a released product. A project links to its site only when that site is public.
             </p>
             <p id="on-request">

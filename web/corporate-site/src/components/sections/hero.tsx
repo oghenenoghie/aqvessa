@@ -39,7 +39,7 @@ export function Hero() {
             </div>
             <div className="grid gap-1 border-l border-hairline pl-6">
               <span className="type-display-lg tabular-nums">{String(PRODUCTS.length).padStart(2, "0")}</span>
-              <span className="type-body-sm text-ink-muted">products in development</span>
+              <span className="type-body-sm text-ink-muted">products, each with its stage</span>
             </div>
           </div>
           <span className="type-mono-sm text-ink-muted">{TAGLINE.join(" / ")}</span>

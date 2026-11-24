@@ -86,16 +86,18 @@ Technology choices are made according to each project's requirements rather than
 
 AQVESSA is focused on building and developing proprietary digital products.
 
-One of our software initiatives is **Plutus**, an enterprise HR, payroll and business management software ecosystem.
+One of our software initiatives is **Plutus**, an accounting, payroll, HR and business management software ecosystem. Its Cloud and Desktop editions are feature-complete.
 
-Its development areas include:
+Its areas include:
 
 - Human resource management.
 - Payroll and wage administration.
+- Payroll in six countries: Nigeria, the Gambia, Rwanda, Kenya, Ghana and Côte d'Ivoire.
 - Accounting and compliance.
+- Inventory and stock control.
 - Recruitment and applicant tracking.
 - Learning management.
-- Business reporting and analytics.
+- Analytics and reporting.
 - Cloud and desktop software delivery.
 
 Another is **Intelligent CBT**, a computer-based testing platform for schools. AI drafts exam questions only from a school's own approved learning materials, and teachers approve every question before it is used in an exam.

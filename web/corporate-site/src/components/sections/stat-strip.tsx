@@ -1,5 +1,5 @@
 import { COMPANY_DETAILS } from "@/content/company";
-import { PRODUCTS } from "@/content/products";
+import { PRODUCTS, stageOf } from "@/content/products";
 import { WORKING_PROJECTS } from "@/content/projects";
 import { cn } from "@/lib/utils";
 
@@ -9,7 +9,7 @@ const STATS: readonly (readonly [string, string])[] = [
   ...(COMPANY_DETAILS.sectorsServed !== null ? [[String(COMPANY_DETAILS.sectorsServed), "sectors served"] as const] : []),
   [
     String(PRODUCTS.length),
-    `${PRODUCTS.length === 1 ? "product" : "products"} in development: ${new Intl.ListFormat("en-GB").format(PRODUCTS.map((p) => p.name))}`,
+    `${PRODUCTS.length === 1 ? "product" : "products"}: ${new Intl.ListFormat("en-GB").format(PRODUCTS.map((p) => `${p.name}, ${stageOf(p.stage).name.toLowerCase()}`))}`,
   ],
   ...(COMPANY_DETAILS.foundedYear !== null ? [[String(COMPANY_DETAILS.foundedYear), "Founded"] as const] : []),
 ];
