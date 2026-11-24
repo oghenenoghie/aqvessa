@@ -33,7 +33,7 @@ describe("stat strip", () => {
   it("shows the working-deployment and in-development figures, and no empty ones", () => {
     const html = renderToStaticMarkup(<StatStrip />);
     expect(html).toContain("projects with a working deployment");
-    expect(html).toContain("products in development");
+    expect(html).toContain("products: Plutus, completed");
     expect(html).not.toMatch(/registered share capital|stages every product/);
     expect(html).not.toMatch(/\[\[|null|undefined/);
   });

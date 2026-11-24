@@ -67,7 +67,7 @@ export default function BusinessPage() {
                     )}
                     {products.length > 0 && (
                       <p className="mt-6 type-body-sm text-ink-muted">
-                        In development:{" "}
+                        Products:{" "}
                         {products.map((product, i) => (
                           <span key={product.slug}>
                             {i > 0 && ", "}

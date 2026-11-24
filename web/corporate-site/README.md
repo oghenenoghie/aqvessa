@@ -62,7 +62,7 @@ The form and the privacy notice assume no cookies and no analytics. If either ch
   - no "Aqvessa Technologies"
   - capital AQVESSA only in AQVESSA LIMITED
 - `src/content/projects.ts`: the projects page. A project is listed only when its latest production deployment succeeded (or, for Plutus Desktop, installer builds are published), checked on `PROJECTS_CHECKED`. Each entry is written from its repository. Work for organisations is never named or linked; tests enforce that, and that every link is a public HTTPS address. Re-check deployments and update the date when adding or removing a project.
-- `src/content/products.ts`: products and the five stages. Change a product's `stage` and `asOf` only after checking its repositories. A test fails if a product goes past stage 2.
+- `src/content/products.ts`: products and the five stages. Change a product's `stage` and `asOf` only after checking its repositories. A test fails if a product goes past stage 3. Plutus moved to stage 3 on 24 November 2026; Intelligent CBT is held at stage 2.
 - `src/lib/site.ts`: site URL, contact details and navigation. Enquiries go to `info@aqvessa.org` and to two WhatsApp numbers. The Kuwait number is WhatsApp only. The Nigerian number (`calls: true`) also takes ordinary calls, so it alone gets a `tel:` link and a `telephone` entry in the structured data. Tests check that each number's display, links and country code agree, and that every `tel:` link comes from `telHref`, which refuses a number without `calls`.
 - `src/components/sections/`: the home page sections. `contact.tsx` is reused on `/contact`.
 - `next.config.ts`: security headers and a Content Security Policy without nonces, so pages stay static.
